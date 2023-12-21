@@ -8,8 +8,29 @@ const Navbar1 = () => {
   const routor = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    if (value === "kitchenItems") {
-      routor.push("./kitchen-items");
+    if (value === "kitchen") {
+      routor.push("./cooking-hub");
+    }
+    if (value === "living") {
+      routor.push("./family-hub");
+    }
+    if (value === "bed") {
+      routor.push("./sleep-sanctuary");
+    }
+    if (value === "dine") {
+      routor.push("./dining-domain");
+    }
+    if (value === "bathroom") {
+      routor.push("./refresh-zone");
+    }
+    if (value === "entry") {
+      routor.push("./entry-foyer");
+    }
+    if (value === "outdoor") {
+      routor.push("./outdoor-oasis");
+    }
+    if (value === "office") {
+      routor.push("./office-nook");
     }
   };
 
@@ -18,23 +39,24 @@ const Navbar1 = () => {
       <Link href="./">
         <Image src={""} alt="logo" />
       </Link>
-      <ul className="flex gap-5">
-        <li>
+      <div className="flex gap-5">
+        <div>
           <select name="" id="" onChange={handleChange}>
-            <option>Products</option>
-            <option value="kitchenItems">Kitchen items</option>
-            <option value="b">b</option>
-            <option value="c">c</option>
+            <option>Modern Collection</option>
+            <option value="entry">Entry Foyer</option>
+            <option value="living">Family Hub</option>
+            <option value="bed">Sleep Sanctuary</option>
+            <option value="kitchen">Cooking Hub</option>
+            <option value="dine">Dining Domain</option>
+            <option value="bathroom">Refresh Zone</option>
+            <option value="outdoor">Outdoor Oasis</option>
+            <option value="office">Office Nook</option>
           </select>
-        </li>
+        </div>
 
-        <Link href="./kitchen-items">
-          <li>About us</li>
-        </Link>
-        <Link href="#">
-          <li>Sign in</li>
-        </Link>
-      </ul>
+        <Link href="">About us</Link>
+        <Link href="#">Sign in</Link>
+      </div>
     </nav>
   );
 };
