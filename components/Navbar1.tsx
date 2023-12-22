@@ -9,34 +9,34 @@ const Navbar1 = () => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     if (value === "kitchen") {
-      routor.push("./cooking-hub");
+      routor.push("/cooking-hub");
     }
     if (value === "living") {
-      routor.push("./family-hub");
+      routor.push("/family-hub");
     }
     if (value === "bed") {
-      routor.push("./sleep-sanctuary");
+      routor.push("/sleep-sanctuary");
     }
     if (value === "dine") {
-      routor.push("./dining-domain");
+      routor.push("/dining-domain");
     }
     if (value === "bathroom") {
-      routor.push("./refresh-zone");
+      routor.push("/refresh-zone");
     }
     if (value === "entry") {
-      routor.push("./entry-foyer");
+      routor.push("/entry-foyer");
     }
     if (value === "outdoor") {
-      routor.push("./outdoor-oasis");
+      routor.push("/outdoor-oasis");
     }
     if (value === "office") {
-      routor.push("./office-nook");
+      routor.push("/office-nook");
     }
   };
 
   return (
     <nav className="flex justify-between items-center p-10 h-10 bg-red-200">
-      <Link href="./">
+      <Link href="/">
         <Image src={""} alt="logo" />
       </Link>
       <div className="flex gap-5">
