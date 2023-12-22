@@ -6,13 +6,13 @@ import { itemTypes } from "./AddItemForm";
 const itemsData = async () => {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/wood_hub?category=entryFoyer",
+      "http://localhost:3000/api/wood_hub?category=kitchen",
       {
         cache: "no-store",
       }
     );
     if (!res.ok) {
-      alert("Faild to fetch Entry Foyer items");
+      alert("Faild to fetch Cooking Hub items");
     }
 
     return res.json();
@@ -21,14 +21,14 @@ const itemsData = async () => {
   }
 };
 
-const EntryFoyer = async () => {
+const Kitchen = async () => {
   try {
     const { items } = await itemsData();
     return (
       <div>
         <Link
           className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
-          href={"/addItem/entry_foyer"}
+          href={"/addItem/cooking-hub"}
         >
           ADD ITEM
         </Link>
@@ -72,4 +72,4 @@ const EntryFoyer = async () => {
   }
 };
 
-export default EntryFoyer;
+export default Kitchen;

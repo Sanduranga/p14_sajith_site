@@ -14,16 +14,16 @@ const Navbar1 = () => {
     if (value === "living") {
       routor.push("/family-hub");
     }
-    if (value === "bed") {
+    if (value === "bedroom") {
       routor.push("/sleep-sanctuary");
     }
-    if (value === "dine") {
+    if (value === "dining") {
       routor.push("/dining-domain");
     }
     if (value === "bathroom") {
       routor.push("/refresh-zone");
     }
-    if (value === "entry") {
+    if (value === "entryFoyer") {
       routor.push("/entry-foyer");
     }
     if (value === "outdoor") {
@@ -43,11 +43,11 @@ const Navbar1 = () => {
         <div>
           <select name="" id="" onChange={handleChange}>
             <option>Modern Collection</option>
-            <option value="entry">Entry Foyer</option>
+            <option value="entryFoyer">Entry Foyer</option>
             <option value="living">Family Hub</option>
-            <option value="bed">Sleep Sanctuary</option>
+            <option value="bedroom">Sleep Sanctuary</option>
             <option value="kitchen">Cooking Hub</option>
-            <option value="dine">Dining Domain</option>
+            <option value="dining">Dining Domain</option>
             <option value="bathroom">Refresh Zone</option>
             <option value="outdoor">Outdoor Oasis</option>
             <option value="office">Office Nook</option>
