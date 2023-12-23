@@ -2,6 +2,12 @@ import connectMongoDB from "@/libs/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import entryfoyerUploadModel from "@/models/entryfoyerModel";
 import kitchenUploadsModel from "@/models/kitchenModel";
+import livinguploadsModel from "@/models/livingModel";
+import diningUploadsModel from "@/models/diningModel";
+import bedroomUploadsModel from "@/models/bedroomModel";
+import officeUploadsModel from "@/models/officeModel";
+import outdoorUploadsModel from "@/models/outdoorModel";
+import bathroomUploadsModel from "@/models/bathroomModel";
 
 export async function POST(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category");
@@ -41,21 +47,87 @@ export async function POST(request: NextRequest) {
     });
   }
   if (category === "living") {
+    await livinguploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   if (category === "dining") {
+    await diningUploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   if (category === "bedroom") {
+    await bedroomUploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   if (category === "office") {
+    await officeUploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   if (category === "bathroom") {
+    await bathroomUploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   if (category === "ourdoor") {
+    await outdoorUploadsModel.create({
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      description,
+    });
   }
+
   return NextResponse.json({ message: "Item Uploaded" }, { status: 201 });
 }
 
-// GET API ***********************************************************************
+//************************  GET API *********************************************************
 
 export async function GET(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category");
@@ -70,20 +142,32 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "living") {
+    const items = await livinguploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "dining") {
+    const items = await diningUploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "bedroom") {
+    const items = await bedroomUploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "office") {
+    const items = await officeUploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "bathroom") {
+    const items = await bathroomUploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
   if (category === "ourdoor") {
+    const items = await outdoorUploadsModel.find();
+    return NextResponse.json({ items }, { status: 200 });
   }
 }
 
-// DELETE API ***********************************************************************
+//************************** DELETE API *************************************************
 
 export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
@@ -96,16 +180,22 @@ export async function DELETE(request: NextRequest) {
     await kitchenUploadsModel.findByIdAndDelete(id);
   }
   if (category === "living") {
+    await livinguploadsModel.findByIdAndDelete(id);
   }
   if (category === "dining") {
+    await diningUploadsModel.findByIdAndDelete(id);
   }
   if (category === "bedroom") {
+    await bedroomUploadsModel.findByIdAndDelete(id);
   }
   if (category === "office") {
+    await officeUploadsModel.findByIdAndDelete(id);
   }
   if (category === "bathroom") {
+    await bedroomUploadsModel.findByIdAndDelete(id);
   }
   if (category === "ourdoor") {
+    await outdoorUploadsModel.findByIdAndDelete(id);
   }
   return NextResponse.json({ message: "Item Deleted" }, { status: 200 });
 }

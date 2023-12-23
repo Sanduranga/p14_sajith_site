@@ -1,6 +1,12 @@
 import connectMongoDB from "@/libs/mongodb";
+import bathroomUploadsModel from "@/models/bathroomModel";
+import bedroomUploadsModel from "@/models/bedroomModel";
+import diningUploadsModel from "@/models/diningModel";
 import entryfoyerUploadModel from "@/models/entryfoyerModel";
 import kitchenUploadsModel from "@/models/kitchenModel";
+import livinguploadsModel from "@/models/livingModel";
+import officeUploadsModel from "@/models/officeModel";
+import outdoorUploadsModel from "@/models/outdoorModel";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(request: NextRequest, { params }: any) {
@@ -30,7 +36,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "living") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
+    await livinguploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -42,7 +48,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "bedroom") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
+    await bedroomUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -54,7 +60,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "dining") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
+    await diningUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -66,7 +72,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "outdoor") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
+    await outdoorUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -78,7 +84,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "office") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
+    await officeUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -102,7 +108,7 @@ export async function PUT(request: NextRequest, { params }: any) {
     });
   }
   if (category === "bathroom") {
-    await entryfoyerUploadModel.findByIdAndUpdate(id, {
+    await bathroomUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
       image2,
@@ -116,6 +122,8 @@ export async function PUT(request: NextRequest, { params }: any) {
   return NextResponse.json({ message: "Item Updated" }, { status: 200 });
 }
 
+//***********************  GET ONE ***************************************************
+
 export async function GET(request: NextRequest, { params }: any) {
   const category = request.nextUrl.searchParams.get("category");
   const { id } = params;
@@ -128,16 +136,28 @@ export async function GET(request: NextRequest, { params }: any) {
     const item = await kitchenUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
   }
-  // if (category === "living") {
-  // }
-  // if (category === "dining") {
-  // }
-  // if (category === "bedroom") {
-  // }
-  // if (category === "office") {
-  // }
-  // if (category === "bathroom") {
-  // }
-  // if (category === "ourdoor") {
-  // }
+  if (category === "living") {
+    const item = await livinguploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
+  if (category === "dining") {
+    const item = await diningUploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
+  if (category === "bedroom") {
+    const item = await bedroomUploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
+  if (category === "office") {
+    const item = await officeUploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
+  if (category === "bathroom") {
+    const item = await bathroomUploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
+  if (category === "ourdoor") {
+    const item = await outdoorUploadsModel.findOne({ _id: id });
+    return NextResponse.json({ item }, { status: 200 });
+  }
 }
