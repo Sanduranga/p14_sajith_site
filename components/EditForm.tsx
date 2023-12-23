@@ -14,15 +14,6 @@ interface editItemTypes {
   newDescription: string;
 }
 
-// { section },
-//   { image1 },
-//   { image2 },
-//   { image3 },
-//   { image4 },
-//   { image5 },
-//   { price },
-//   { description }
-
 const EditForm = (props: itemTypes) => {
   const [input, setInput] = useState({} as editItemTypes);
   const router = useRouter();
@@ -41,7 +32,7 @@ const EditForm = (props: itemTypes) => {
     } = input;
     try {
       const res = await fetch(
-        `http://localhost:3000/api/wood_hub?category=${props._id}`,
+        `http://localhost:3000/api/wood_hub/${props._id}?category=${props.section}`,
         {
           method: "PUT",
           headers: {
@@ -84,7 +75,8 @@ const EditForm = (props: itemTypes) => {
       >
         <select
           className="border-2 border-black px-2 rounded-md"
-          name="section"
+          name="newSection"
+          defaultValue={props.section}
           onChange={handleChange}
         >
           <option>Modern Collection</option>
@@ -101,51 +93,56 @@ const EditForm = (props: itemTypes) => {
           className="border-2 border-black px-2 rounded-md"
           placeholder="image1"
           type="text"
-          name="image1"
-          value={props.image1}
+          name="newImage1"
+          defaultValue={props.image1}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="image2"
           type="text"
-          name="image2"
-          value={props.image2}
+          name="newImage2"
+          defaultValue={props.image2}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="image3"
           type="text"
-          name="image3"
+          name="newImage3"
+          defaultValue={props.image3}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="image4"
           type="text"
-          name="image4"
+          name="newImage4"
+          defaultValue={props.image4}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="image5"
           type="text"
-          name="image5"
+          name="newImage5"
+          defaultValue={props.image5}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="price"
           type="number"
-          name="price"
+          name="newPrice"
+          defaultValue={props.price}
           onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="description"
           type="text"
-          name="description"
+          name="newDescription"
+          defaultValue={props.description}
           onChange={handleChange}
         />
         <button className="p-2 bg-orange-400 font-bold rounded-md">Edit</button>

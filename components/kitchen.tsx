@@ -41,10 +41,10 @@ const Kitchen = async () => {
               <div className="h-[100px] bg-red-300">{item.image1}</div>
               <div className="text-center">Rs. {item.price}</div>
               <div className="flex justify-between">
-                <DeleteButton id={item._id} />
+                <DeleteButton id={item._id} category={item.section} />
                 <Link
                   className="p-1 rounded-md bg-blue-500 text-white"
-                  href={`/editItem/${item._id}`}
+                  href={`editItem/${item._id}/${item.section}`}
                 >
                   Edit
                 </Link>

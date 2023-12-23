@@ -1,8 +1,7 @@
 import EditForm from "@/components/EditForm";
 
-const getItemById = async (id: any) => {
+const getItemById = async (id: string, category: string) => {
   try {
-    const category = "kitchen";
     const res = await fetch(
       `http://localhost:3000/api/wood_hub/${id}?category=${category}`,
       {
@@ -18,9 +17,17 @@ const getItemById = async (id: any) => {
   }
 };
 
-export default async function EditItem({ params }: any) {
-  const { id } = params;
-  const { item } = await getItemById(id);
+export default async function EditItem({
+  params,
+}: {
+  params: { editItemId: string[] };
+}) {
+  const id = params.editItemId[0];
+  const category = params.editItemId[1];
+  console.log("idddddddd ", id);
+  console.log("categoryyyy ", category);
+
+  const { item } = await getItemById(id, category);
   const {
     section,
     image1,

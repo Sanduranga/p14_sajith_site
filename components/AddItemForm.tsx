@@ -35,7 +35,7 @@ const AddItemForm = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/api/wood_hub?category=${"kitchen"}`,
+        `http://localhost:3000/api/wood_hub?category=${section}`,
         {
           method: "POST",
           headers: {
