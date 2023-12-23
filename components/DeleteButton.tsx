@@ -9,7 +9,7 @@ const DeleteButton = ({ id }: any) => {
     try {
       if (confirmed) {
         const res = await fetch(
-          `http://localhost:3000/api/entry_foyer?id=${id}`,
+          `http://localhost:3000/api/wood_hub?id=${id}&category=${}`,**************
           {
             method: "DELETE",
           }
