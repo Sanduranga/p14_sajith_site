@@ -1,7 +1,12 @@
+import Living from "@/components/Living";
 import React from "react";
 
-const Living = () => {
-  return <div>Living</div>;
+const LivingItems = () => {
+  return (
+    <>
+      <Living />
+    </>
+  );
 };
 
-export default Living;
+export default LivingItems;

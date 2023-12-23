@@ -1,7 +1,12 @@
+import Outdoor from "@/components/Outdoor";
 import React from "react";
 
-const Outdoor = () => {
-  return <div>Outdoor</div>;
+const OutdoorItems = () => {
+  return (
+    <>
+      <Outdoor />
+    </>
+  );
 };
 
-export default Outdoor;
+export default OutdoorItems;

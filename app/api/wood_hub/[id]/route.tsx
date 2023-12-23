@@ -9,7 +9,10 @@ import officeUploadsModel from "@/models/officeModel";
 import outdoorUploadsModel from "@/models/outdoorModel";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(request: NextRequest, { params }: any) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const { id } = params;
   const category = request.nextUrl.searchParams.get("category");
   const {
@@ -124,7 +127,10 @@ export async function PUT(request: NextRequest, { params }: any) {
 
 //***********************  GET ONE ***************************************************
 
-export async function GET(request: NextRequest, { params }: any) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const category = request.nextUrl.searchParams.get("category");
   const { id } = params;
   await connectMongoDB();
@@ -156,7 +162,7 @@ export async function GET(request: NextRequest, { params }: any) {
     const item = await bathroomUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
   }
-  if (category === "ourdoor") {
+  if (category === "outdoor") {
     const item = await outdoorUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
   }

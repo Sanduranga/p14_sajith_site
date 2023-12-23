@@ -2,9 +2,9 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const DeleteButton = ({ id, category }: { id: string; category: string }) => {
+const DeleteButton = ({ id, category }: { id?: string; category?: string }) => {
   const router = useRouter();
-  const handleDelete = async (id: string, category: string) => {
+  const handleDelete = async (id?: string, category?: string) => {
     const confirmed = confirm("Are you sure?");
     try {
       if (confirmed) {

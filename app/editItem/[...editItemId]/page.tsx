@@ -24,8 +24,6 @@ export default async function EditItem({
 }) {
   const id = params.editItemId[0];
   const category = params.editItemId[1];
-  console.log("idddddddd ", id);
-  console.log("categoryyyy ", category);
 
   const { item } = await getItemById(id, category);
   const {

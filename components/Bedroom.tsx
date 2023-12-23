@@ -6,13 +6,13 @@ import { itemTypes } from "./AddItemForm";
 const itemsData = async () => {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/wood_hub?category=kitchen",
+      "http://localhost:3000/api/wood_hub?category=bedroom",
       {
         cache: "no-store",
       }
     );
     if (!res.ok) {
-      alert("Faild to fetch Cooking Hub items");
+      alert("Faild to fetch Entry Foyer items");
     }
 
     return res.json();
@@ -21,7 +21,7 @@ const itemsData = async () => {
   }
 };
 
-const Kitchen = async () => {
+const Bedroom = async () => {
   try {
     const { items } = await itemsData();
     if (items.length > 0) {
@@ -66,7 +66,7 @@ const Kitchen = async () => {
           </Link>
 
           <div className="flex w-fit mx-auto font-bold">
-            There are no Cooking hub items to show
+            There are no Sleep sanctuary items to show
           </div>
         </div>
       );
@@ -76,4 +76,4 @@ const Kitchen = async () => {
   }
 };
 
-export default Kitchen;
+export default Bedroom;

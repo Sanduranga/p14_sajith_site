@@ -1,7 +1,12 @@
+import Office from "@/components/Office";
 import React from "react";
 
-const Office = () => {
-  return <div>Office</div>;
+const OfficeItems = () => {
+  return (
+    <>
+      <Office />
+    </>
+  );
 };
 
-export default Office;
+export default OfficeItems;

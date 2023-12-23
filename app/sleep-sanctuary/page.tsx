@@ -1,7 +1,13 @@
+import Bedroom from "@/components/Bedroom";
 import React from "react";
 
-const Bedroom = () => {
-  return <div> Bedroom</div>;
+const BedroomItems = () => {
+  return (
+    <>
+      {" "}
+      <Bedroom />
+    </>
+  );
 };
 
-export default Bedroom;
+export default BedroomItems;

@@ -1,7 +1,12 @@
+import Dining from "@/components/Dining";
 import React from "react";
 
-const Dining = () => {
-  return <div>Dining</div>;
+const DiningItems = () => {
+  return (
+    <>
+      <Dining />
+    </>
+  );
 };
 
-export default Dining;
+export default DiningItems;

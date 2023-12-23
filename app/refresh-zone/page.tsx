@@ -1,7 +1,12 @@
+import Bathroom from "@/components/bathroom";
 import React from "react";
 
-const Bathroom = () => {
-  return <div>Bathroom</div>;
+const BathroomItems = () => {
+  return (
+    <>
+      <Bathroom />
+    </>
+  );
 };
 
-export default Bathroom;
+export default BathroomItems;

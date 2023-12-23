@@ -1,8 +1,8 @@
 import EntryFoyer from "@/components/EntryFoyer";
 import React from "react";
 
-const EntryFo = () => {
+const EntryFoyerItems = () => {
   return <EntryFoyer />;
 };
 
-export default EntryFo;
+export default EntryFoyerItems;

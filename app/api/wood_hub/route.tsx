@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       price,
       description,
     });
-  } else if (category === "ourdoor") {
+  } else if (category === "outdoor") {
     await outdoorUploadsModel.create({
       section,
       image1,
@@ -143,7 +143,7 @@ export async function GET(request: NextRequest) {
   } else if (category === "bathroom") {
     const items = await bathroomUploadsModel.find();
     return NextResponse.json({ items }, { status: 200 });
-  } else if (category === "ourdoor") {
+  } else if (category === "outdoor") {
     const items = await outdoorUploadsModel.find();
     return NextResponse.json({ items }, { status: 200 });
   }
@@ -169,7 +169,7 @@ export async function DELETE(request: NextRequest) {
     await officeUploadsModel.findByIdAndDelete(id);
   } else if (category === "bathroom") {
     await bedroomUploadsModel.findByIdAndDelete(id);
-  } else if (category === "ourdoor") {
+  } else if (category === "outdoor") {
     await outdoorUploadsModel.findByIdAndDelete(id);
   }
   return NextResponse.json({ message: "Item Deleted" }, { status: 200 });
