@@ -1,6 +1,6 @@
 "use client";
-
-import { useRouter } from "next/navigation";
+import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
+import Image from "next/image";
 import { useState } from "react";
 
 export interface itemTypes {
@@ -17,7 +17,6 @@ export interface itemTypes {
 
 const AddItemForm = () => {
   const [input, setInput] = useState({} as itemTypes);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,12 +63,86 @@ const AddItemForm = () => {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<any>
   ) => {
+    // *****************  Here I am trying to implement image to Base64 and upload to the MongoDB ********
+
+    // if (e.target.name === "image2" && e.target.files) {
+    //   console.log("img 2");
+
+    //   const reader = new FileReader();
+    //   reader.readAsDataURL(e.target.files[0]);
+    //   reader.onload = () => {
+    //     setInput((prevInput) => ({
+    //       ...prevInput,
+    //       [e.target.name]: reader.result,
+    //     }));
+    //     console.log(reader.result);
+    //   };
+    //   reader.onerror = (error) => {
+    //     console.log("Error : ", error);
+    //   };
+    // } else {
+
+    //  **************************************************************************
+
     setInput((prevInput) => ({
       ...prevInput,
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleUploadimage1 = (result: CldUploadWidgetResults) => {
+    const info = result.info as object;
+
+    if ("secure_url" in info) {
+      setInput((prevInput) => ({
+        ...prevInput,
+        ["image1"]: info.secure_url as string,
+      }));
+    }
+  };
+  const handleUploadimage2 = (result: CldUploadWidgetResults) => {
+    const info = result.info as object;
+
+    if ("secure_url" in info) {
+      setInput((prevInput) => ({
+        ...prevInput,
+        ["image2"]: info.secure_url as string,
+      }));
+    }
+  };
+  const handleUploadimage3 = (result: CldUploadWidgetResults) => {
+    const info = result.info as object;
+
+    if ("secure_url" in info) {
+      setInput((prevInput) => ({
+        ...prevInput,
+        ["image3"]: info.secure_url as string,
+      }));
+    }
+  };
+  const handleUploadimage4 = (result: CldUploadWidgetResults) => {
+    const info = result.info as object;
+
+    if ("secure_url" in info) {
+      setInput((prevInput) => ({
+        ...prevInput,
+        ["image4"]: info.secure_url as string,
+      }));
+    }
+  };
+  const handleUploadimage5 = (result: CldUploadWidgetResults) => {
+    const info = result.info as object;
+
+    if ("secure_url" in info) {
+      setInput((prevInput) => ({
+        ...prevInput,
+        ["image5"]: info.secure_url as string,
+      }));
+    }
+  };
+
   return (
     <div>
       <form
@@ -91,16 +164,206 @@ const AddItemForm = () => {
           <option value="outdoor">Outdoor Oasis</option>
           <option value="office">Office Nook</option>
         </select>
-        <input
+
+        {/* <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="image1"
           type="text"
           name="image1"
           onChange={handleChange}
+        /> */}
+
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="price"
+          type="number"
+          name="price"
+          onChange={handleChange}
         />
         <input
           className="border-2 border-black px-2 rounded-md"
+          placeholder="description"
+          type="text"
+          name="description"
+          onChange={handleChange}
+        />
+
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage1}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image1 && (
+            <Image
+              src={input.image1}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage2}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image2 && (
+            <Image
+              src={input.image2}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage3}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image3 && (
+            <Image
+              src={input.image3}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage3}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image3 && (
+            <Image
+              src={input.image3}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage4}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image4 && (
+            <Image
+              src={input.image4}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+
+        <CldUploadButton
+          uploadPreset="wq0w4znw"
+          className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
+          onUpload={handleUploadimage5}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+            />
+          </svg>
+          {input.image5 && (
+            <Image
+              src={input.image5}
+              alt="image_1"
+              className="absolute object-cover inset-0"
+              fill
+            />
+          )}
+        </CldUploadButton>
+        {/* <input
+          className="border-2 border-black px-2 rounded-md"
           placeholder="image2"
+          defaultValue={}
           type="text"
           name="image2"
           onChange={handleChange}
@@ -125,21 +388,8 @@ const AddItemForm = () => {
           type="text"
           name="image5"
           onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="price"
-          type="number"
-          name="price"
-          onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="description"
-          type="text"
-          name="description"
-          onChange={handleChange}
-        />
+        /> */}
+
         <button className="p-2 bg-orange-400 font-bold rounded-md">
           Submit
         </button>

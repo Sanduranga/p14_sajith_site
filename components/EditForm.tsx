@@ -145,7 +145,9 @@ const EditForm = (props: itemTypes) => {
           defaultValue={props.description}
           onChange={handleChange}
         />
-        <button className="p-2 bg-orange-400 font-bold rounded-md">Edit</button>
+        <button className="p-2 bg-orange-400 font-bold rounded-md">
+          Update
+        </button>
       </form>
     </div>
   );
