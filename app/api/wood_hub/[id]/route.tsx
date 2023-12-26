@@ -135,34 +135,27 @@ export async function GET(
   const { id } = params;
   await connectMongoDB();
   if (category === "entryFoyer") {
-    const item = entryfoyerUploadModel.findOne({ _id: id });
+    const item = await entryfoyerUploadModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "kitchen") {
+  } else if (category === "kitchen") {
     const item = await kitchenUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "living") {
+  } else if (category === "living") {
     const item = await livinguploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "dining") {
+  } else if (category === "dining") {
     const item = await diningUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "bedroom") {
+  } else if (category === "bedroom") {
     const item = await bedroomUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "office") {
+  } else if (category === "office") {
     const item = await officeUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "bathroom") {
+  } else if (category === "bathroom") {
     const item = await bathroomUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
-  }
-  if (category === "outdoor") {
+  } else if (category === "outdoor") {
     const item = await outdoorUploadsModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
   }

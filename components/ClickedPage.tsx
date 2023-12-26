@@ -1,19 +1,8 @@
 "use client";
 import Image from "next/image";
-import { CldUploadButton, CldUploadWidgetResults } from "next-cloudinary";
+import { itemTypes } from "./AddItemForm";
 
-interface editItemTypes {
-  newSection: string;
-  newImage1: string;
-  newImage2: string;
-  newImage3: string;
-  newImage4: string;
-  newImage5: string;
-  newPrice: number;
-  newDescription: string;
-}
-
-export default function ClickedPage() {
+export default function ClickedPage(props: itemTypes) {
   return (
     <div>
       <div className="wrapper flex flex-col px-5 mx-auto">
@@ -22,7 +11,7 @@ export default function ClickedPage() {
             <div className="img container flex flex-col gap-5">
               <div className=" bg-green-600">
                 <Image
-                  src={"/images/wooden_bed.webp"}
+                  src={props.image1}
                   alt="mainImg"
                   width={768}
                   height={500}
@@ -33,9 +22,7 @@ export default function ClickedPage() {
               <div className="flex gap-3 ">
                 <div className="">
                   <Image
-                    src={
-                      "https://res.cloudinary.com/dmu0y9djr/image/upload/v1703589093/wood_items/aqqvwkznnf2jh5d11tjq.jpg"
-                    }
+                    src={props.image2}
                     alt="mainImg"
                     width={768}
                     height={500}
@@ -43,7 +30,7 @@ export default function ClickedPage() {
                 </div>
                 <div>
                   <Image
-                    src={"/images/wooden_bed.webp"}
+                    src={props.image3}
                     alt="mainImg"
                     width={768}
                     height={500}
@@ -51,7 +38,7 @@ export default function ClickedPage() {
                 </div>
                 <div>
                   <Image
-                    src={"/images/wooden_bed.webp"}
+                    src={props.image4}
                     alt="mainImg"
                     width={768}
                     height={500}
@@ -59,7 +46,7 @@ export default function ClickedPage() {
                 </div>
                 <div>
                   <Image
-                    src={"/images/wooden_bed.webp"}
+                    src={props.image5}
                     alt="mainImg"
                     width={768}
                     height={500}
@@ -67,7 +54,7 @@ export default function ClickedPage() {
                 </div>
                 <div>
                   <Image
-                    src={"/images/wooden_bed.webp"}
+                    src={props.image1}
                     alt="mainImg"
                     width={768}
                     height={500}

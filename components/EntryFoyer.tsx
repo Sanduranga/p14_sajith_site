@@ -44,16 +44,18 @@ const EntryFoyer = async () => {
                   key={item._id}
                   className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
                 >
-                  <div className=" bg-red-300">
-                    <Image
-                      src={item.image1}
-                      alt="itemImg"
-                      width={750}
-                      height={500}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="text-center">Rs. {item.price}</div>
+                  <Link href={`clicked-item/${item._id}/${item.section}`}>
+                    <div className=" bg-red-300">
+                      <Image
+                        src={item.image1}
+                        alt="itemImg"
+                        width={750}
+                        height={500}
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-center">Rs. {item.price}</div>
+                  </Link>
                   <div className="flex justify-between">
                     <DeleteButton id={item._id} category={item.section} />
                     <Link
@@ -77,16 +79,18 @@ const EntryFoyer = async () => {
                   key={item._id}
                   className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
                 >
-                  <div className=" bg-red-300">
-                    <Image
-                      src={item.image1}
-                      alt="itemImg"
-                      width={750}
-                      height={500}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="text-center">Rs. {item.price}</div>
+                  <Link href={`clicked-item/${item._id}/${item.section}`}>
+                    <div className=" bg-red-300">
+                      <Image
+                        src={item.image1}
+                        alt="itemImg"
+                        width={750}
+                        height={500}
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="text-center">Rs. {item.price}</div>
+                  </Link>
                 </div>
               ))}
             </div>

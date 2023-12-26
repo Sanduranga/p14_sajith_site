@@ -1,5 +1,5 @@
+import { itemTypes } from "@/components/AddItemForm";
 import ClickedPage from "@/components/ClickedPage";
-import EditForm from "@/components/EditForm";
 
 const getItemById = async (id: string, category: string) => {
   try {
@@ -12,9 +12,13 @@ const getItemById = async (id: string, category: string) => {
     if (!res.ok) {
       throw new Error("Edit item fetching faild");
     }
+
     return res.json();
   } catch (error) {
-    console.log(error);
+    console.log(
+      "clicked-page error********************************** =",
+      error
+    );
   }
 };
 
@@ -25,8 +29,11 @@ export default async function ClickedItem({
 }) {
   const id = params.clickedId[0];
   const category = params.clickedId[1];
+  console.log("clicked-page id =", id);
+  console.log("clicked-page categ =", category);
 
   const { item } = await getItemById(id, category);
+
   const {
     section,
     image1,
@@ -40,7 +47,6 @@ export default async function ClickedItem({
 
   return (
     <ClickedPage
-      _id={id}
       section={section}
       image1={image1}
       image2={image2}
