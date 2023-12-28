@@ -36,7 +36,7 @@ export default function ClickedPage(props: itemTypes) {
                       alt="mainImg"
                       width={600}
                       height={600}
-                      className=" relative h-[150px] w-[150px]"
+                      className=" relative object-cover h-[150px] w-[150px]"
                       onClick={() => setBigImage(props.image2)}
                     />
                   </div>
@@ -52,7 +52,7 @@ export default function ClickedPage(props: itemTypes) {
                       alt="mainImg"
                       width={600}
                       height={600}
-                      className=" relative h-[150px] w-[150px]"
+                      className=" relative object-cover h-[150px] w-[150px]"
                       onClick={() => setBigImage(props.image3)}
                     />
                   </div>
@@ -68,7 +68,7 @@ export default function ClickedPage(props: itemTypes) {
                       alt="mainImg"
                       width={600}
                       height={600}
-                      className=" relative object-contain h-[150px] w-[150px]"
+                      className=" relative object-cover h-[150px] w-[150px]"
                       onClick={() => setBigImage(props.image4)}
                     />
                   </div>
@@ -84,7 +84,7 @@ export default function ClickedPage(props: itemTypes) {
                       alt="mainImg"
                       width={600}
                       height={600}
-                      className=" relative h-[150px] w-[150px]"
+                      className=" relative object-cover h-[150px] w-[150px]"
                       onClick={() => setBigImage(props.image5)}
                     />
                   </div>
@@ -100,7 +100,7 @@ export default function ClickedPage(props: itemTypes) {
                       alt="mainImg"
                       width={600}
                       height={600}
-                      className=" relative h-[150px] w-[150px]"
+                      className=" relative object-cover h-[150px] w-[150px]"
                       onClick={() => setBigImage(props.image1)}
                     />
                   </div>
@@ -115,7 +115,9 @@ export default function ClickedPage(props: itemTypes) {
                   <h2>108 reviews</h2>
                 </div>
                 <div>
-                  <h2 className="font-bold text-xl font-sp">රු. 28500</h2>
+                  <h2 className="font-bold text-xl font-sp">
+                    රු. {props.price}
+                  </h2>
                   <h4>
                     Shop now at Slashed Price (29% OFF) with coupon GIFTMASF
                   </h4>

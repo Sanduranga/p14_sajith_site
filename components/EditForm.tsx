@@ -21,6 +21,7 @@ interface editItemTypes {
 }
 
 const EditForm = (props: itemTypes) => {
+  const router = useRouter();
   const [input, setInput] = useState({} as editItemTypes);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,9 +68,26 @@ const EditForm = (props: itemTypes) => {
           }),
         }
       );
-      // if (res.ok) {
-      //   router.push("/entry-foyer");
-      // }
+      if (res.ok) {
+        alert("Item Updated Successful");
+        if (props.section === "entryFoyer") {
+          router.push("/entry-foyer");
+        } else if (props.section === "kitchen") {
+          router.push("/cooking-hub");
+        } else if (props.section === "living") {
+          router.push("/family-hub");
+        } else if (props.section === "bathroom") {
+          router.push("/refresh-zone");
+        } else if (props.section === "outdoor") {
+          router.push("/outdoor-oasis");
+        } else if (props.section === "bedroom") {
+          router.push("/sleep-sanctuary");
+        } else if (props.section === "office") {
+          router.push("/office-nook");
+        } else if (props.section === "dining") {
+          router.push("/dining-domain");
+        }
+      }
     } catch (error) {
       alert(error);
     }
