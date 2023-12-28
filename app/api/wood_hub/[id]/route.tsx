@@ -23,10 +23,33 @@ export async function PUT(
     newImage4: image4,
     newImage5: image5,
     newPrice: price,
+    newLength: length,
+    newWidth: width,
+    newHeight: height,
+    newMaterial: material,
+    newColor: color,
+    newSize: size,
     newDescription: description,
   } = await request.json();
   await connectMongoDB();
-  if (category === "kitchen") {
+  if (category === "entryFoyer") {
+    await entryfoyerUploadModel.findByIdAndUpdate(id, {
+      section,
+      image1,
+      image2,
+      image3,
+      image4,
+      image5,
+      price,
+      length,
+      width,
+      height,
+      material,
+      color,
+      size,
+      description,
+    });
+  } else if (category === "kitchen") {
     await kitchenUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -35,10 +58,15 @@ export async function PUT(
       image4,
       image5,
       price,
+      length,
+      width,
+      height,
+      material,
+      color,
+      size,
       description,
     });
-  }
-  if (category === "living") {
+  } else if (category === "living") {
     await livinguploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -49,8 +77,7 @@ export async function PUT(
       price,
       description,
     });
-  }
-  if (category === "bedroom") {
+  } else if (category === "bedroom") {
     await bedroomUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -61,8 +88,7 @@ export async function PUT(
       price,
       description,
     });
-  }
-  if (category === "dining") {
+  } else if (category === "dining") {
     await diningUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -73,8 +99,7 @@ export async function PUT(
       price,
       description,
     });
-  }
-  if (category === "outdoor") {
+  } else if (category === "outdoor") {
     await outdoorUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -85,8 +110,7 @@ export async function PUT(
       price,
       description,
     });
-  }
-  if (category === "office") {
+  } else if (category === "office") {
     await officeUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,
@@ -97,20 +121,7 @@ export async function PUT(
       price,
       description,
     });
-  }
-  if (category === "entryFoyer") {
-    await entryfoyerUploadModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  }
-  if (category === "bathroom") {
+  } else if (category === "bathroom") {
     await bathroomUploadsModel.findByIdAndUpdate(id, {
       section,
       image1,

@@ -23,7 +23,7 @@ const itemsData = async () => {
 };
 
 const EntryFoyer = async () => {
-  const userName = "saj" as string;
+  const userName = "sajith" as string;
   try {
     const { items } = await itemsData();
     console.log(items);

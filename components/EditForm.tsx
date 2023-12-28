@@ -12,11 +12,16 @@ interface editItemTypes {
   newImage5: string;
   newPrice: number;
   newDescription: string;
+  newLength: string;
+  newWidth: string;
+  newHeight: string;
+  newMaterial: string;
+  newColor: string;
+  newSize: string;
 }
 
 const EditForm = (props: itemTypes) => {
   const [input, setInput] = useState({} as editItemTypes);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,6 +33,12 @@ const EditForm = (props: itemTypes) => {
       newImage4,
       newImage5,
       newPrice,
+      newLength,
+      newWidth,
+      newHeight,
+      newMaterial,
+      newColor,
+      newSize,
       newDescription,
     } = input;
     try {
@@ -46,6 +57,12 @@ const EditForm = (props: itemTypes) => {
             newImage4,
             newImage5,
             newPrice,
+            newLength,
+            newWidth,
+            newHeight,
+            newMaterial,
+            newColor,
+            newSize,
             newDescription,
           }),
         }
@@ -91,6 +108,71 @@ const EditForm = (props: itemTypes) => {
         </select>
         <input
           className="border-2 border-black px-2 rounded-md"
+          placeholder="price"
+          type="number"
+          name="newPrice"
+          defaultValue={props.price}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="description"
+          type="text"
+          name="newDescription"
+          defaultValue={props.description}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="length"
+          type="text"
+          name="newLength"
+          defaultValue={props.length}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="width"
+          type="text"
+          name="newWidth"
+          defaultValue={props.width}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="height"
+          type="text"
+          name="newHeight"
+          defaultValue={props.height}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="material"
+          type="text"
+          name="newMaterial"
+          defaultValue={props.material}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="color"
+          type="text"
+          name="newColor"
+          defaultValue={props.color}
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="size"
+          type="text"
+          name="newSize"
+          defaultValue={props.size}
+          onChange={handleChange}
+        />
+
+        <input
+          className="border-2 border-black px-2 rounded-md"
           placeholder="image1"
           type="text"
           name="newImage1"
@@ -129,22 +211,7 @@ const EditForm = (props: itemTypes) => {
           defaultValue={props.image5}
           onChange={handleChange}
         />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="price"
-          type="number"
-          name="newPrice"
-          defaultValue={props.price}
-          onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="description"
-          type="text"
-          name="newDescription"
-          defaultValue={props.description}
-          onChange={handleChange}
-        />
+
         <button className="p-2 bg-orange-400 font-bold rounded-md">
           Update
         </button>

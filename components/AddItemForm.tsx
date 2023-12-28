@@ -12,6 +12,12 @@ export interface itemTypes {
   image4: string;
   image5: string;
   price: number;
+  length: string;
+  width: string;
+  height: string;
+  material: string;
+  color: string;
+  size: string;
   description: string;
 }
 
@@ -28,6 +34,12 @@ const AddItemForm = () => {
       image4,
       image5,
       price,
+      length,
+      width,
+      height,
+      material,
+      color,
+      size,
       description,
     } = input;
     console.log(input);
@@ -48,6 +60,12 @@ const AddItemForm = () => {
             image4,
             image5,
             price,
+            length,
+            width,
+            height,
+            material,
+            color,
+            size,
             description,
           }),
         }
@@ -165,14 +183,6 @@ const AddItemForm = () => {
           <option value="office">Office Nook</option>
         </select>
 
-        {/* <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="image1"
-          type="text"
-          name="image1"
-          onChange={handleChange}
-        /> */}
-
         <input
           className="border-2 border-black px-2 rounded-md"
           placeholder="price"
@@ -180,11 +190,52 @@ const AddItemForm = () => {
           name="price"
           onChange={handleChange}
         />
-        <input
+        <textarea
           className="border-2 border-black px-2 rounded-md"
           placeholder="description"
-          type="text"
           name="description"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="length"
+          type="text"
+          name="length"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="width"
+          type="text"
+          name="width"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="height"
+          type="text"
+          name="height"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="material"
+          type="text"
+          name="material"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="color"
+          type="text"
+          name="color"
+          onChange={handleChange}
+        />
+        <input
+          className="border-2 border-black px-2 rounded-md"
+          placeholder="size"
+          type="text"
+          name="size"
           onChange={handleChange}
         />
 
@@ -360,35 +411,6 @@ const AddItemForm = () => {
             />
           )}
         </CldUploadButton>
-        {/* <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="image2"
-          defaultValue={}
-          type="text"
-          name="image2"
-          onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="image3"
-          type="text"
-          name="image3"
-          onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="image4"
-          type="text"
-          name="image4"
-          onChange={handleChange}
-        />
-        <input
-          className="border-2 border-black px-2 rounded-md"
-          placeholder="image5"
-          type="text"
-          name="image5"
-          onChange={handleChange}
-        /> */}
 
         <button className="p-2 bg-orange-400 font-bold rounded-md">
           Submit

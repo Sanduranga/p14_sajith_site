@@ -19,6 +19,12 @@ export async function POST(request: NextRequest) {
     image4,
     image5,
     price,
+    length,
+    width,
+    height,
+    material,
+    color,
+    size,
     description,
   } = await request.json();
   await connectMongoDB();
@@ -32,6 +38,12 @@ export async function POST(request: NextRequest) {
       image4,
       image5,
       price,
+      length,
+      width,
+      height,
+      material,
+      color,
+      size,
       description,
     });
   } else if (category === "entryFoyer") {
@@ -43,6 +55,12 @@ export async function POST(request: NextRequest) {
       image4,
       image5,
       price,
+      length,
+      width,
+      height,
+      material,
+      color,
+      size,
       description,
     });
   } else if (category === "living") {

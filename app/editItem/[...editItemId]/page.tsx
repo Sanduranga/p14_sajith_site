@@ -34,6 +34,12 @@ export default async function EditItem({
     image4,
     image5,
     price,
+    length,
+    width,
+    height,
+    material,
+    color,
+    size,
     description,
   } = item;
 
@@ -47,6 +53,12 @@ export default async function EditItem({
       image4={image4}
       image5={image5}
       price={price}
+      length={length}
+      width={width}
+      height={height}
+      material={material}
+      color={color}
+      size={size}
       description={description}
     />
   );

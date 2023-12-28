@@ -1,122 +1,252 @@
 "use client";
 import Image from "next/image";
 import { itemTypes } from "./AddItemForm";
+import { useState } from "react";
 
 export default function ClickedPage(props: itemTypes) {
+  const [bigImage, setBigImage] = useState(props.image1);
   return (
     <div>
-      <div className="wrapper flex flex-col px-5 mx-auto">
-        <div className="main_container flex flex-col-2 gap-5">
-          <div className="img waraper w-1/2">
-            <div className="img container flex flex-col gap-5">
-              <div className=" bg-green-600">
-                <Image
-                  src={props.image1}
-                  alt="mainImg"
-                  width={768}
-                  height={500}
-                  layout="responsive"
-                  sizes="(min-width: 1540px) 1536px, (min-width: 1280px) 1280px, (min-width: 1040px) 1024px, (min-width: 780px) 768px, (min-width: 680px) 640px, calc(94.44vw + 17px)"
-                />
-              </div>
-              <div className="flex gap-3 ">
-                <div className="">
+      <div className="wrapper flex flex-col px-5 gap-10 mx-auto">
+        <div className="main_container">
+          <div className="flex w-full bg-yellow-300 flex-col-2 gap-5">
+            <div className="img-waraper flex flex-col w-[60dvw] bg-blue-700">
+              <div className="img-container flex flex-col gap-5">
+                <div className=" bg-green-600 h-[600px]">
                   <Image
-                    src={props.image2}
+                    src={bigImage}
                     alt="mainImg"
-                    width={768}
-                    height={500}
+                    layout="responsive"
+                    width={600}
+                    height={600}
+                    objectFit="contain"
+                    sizes="(min-width: 1540px) 1536px, (min-width: 1280px) 1280px, (min-width: 1040px) 1024px, (min-width: 780px) 768px, (min-width: 680px) 640px, calc(94.44vw + 17px)"
                   />
                 </div>
-                <div>
-                  <Image
-                    src={props.image3}
-                    alt="mainImg"
-                    width={768}
-                    height={500}
-                  />
-                </div>
-                <div>
-                  <Image
-                    src={props.image4}
-                    alt="mainImg"
-                    width={768}
-                    height={500}
-                  />
-                </div>
-                <div>
-                  <Image
-                    src={props.image5}
-                    alt="mainImg"
-                    width={768}
-                    height={500}
-                  />
-                </div>
-                <div>
-                  <Image
-                    src={props.image1}
-                    alt="mainImg"
-                    width={768}
-                    height={500}
-                  />
+                <div className="flex justify-center w-full relative gap-3 mx-auto bg-purple-700 h-[150px]">
+                  <div
+                    className={`${
+                      props.image2
+                        ? "cursor-pointer bg-orange-500 relative "
+                        : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={props.image2}
+                      alt="mainImg"
+                      width={600}
+                      height={600}
+                      className=" relative h-[150px] w-[150px]"
+                      onClick={() => setBigImage(props.image2)}
+                    />
+                  </div>
+                  <div
+                    className={`${
+                      props.image3
+                        ? "cursor-pointer bg-orange-500 relative"
+                        : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={props.image3}
+                      alt="mainImg"
+                      width={600}
+                      height={600}
+                      className=" relative h-[150px] w-[150px]"
+                      onClick={() => setBigImage(props.image3)}
+                    />
+                  </div>
+                  <div
+                    className={`${
+                      props.image4
+                        ? "cursor-pointer bg-orange-500 relative"
+                        : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={props.image4}
+                      alt="mainImg"
+                      width={600}
+                      height={600}
+                      className=" relative object-contain h-[150px] w-[150px]"
+                      onClick={() => setBigImage(props.image4)}
+                    />
+                  </div>
+                  <div
+                    className={`${
+                      props.image5
+                        ? "cursor-pointer bg-orange-500 relative"
+                        : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={props.image5}
+                      alt="mainImg"
+                      width={600}
+                      height={600}
+                      className=" relative h-[150px] w-[150px]"
+                      onClick={() => setBigImage(props.image5)}
+                    />
+                  </div>
+                  <div
+                    className={`${
+                      props.image1
+                        ? "cursor-pointer bg-orange-500 relative"
+                        : "hidden"
+                    }`}
+                  >
+                    <Image
+                      src={props.image1}
+                      alt="mainImg"
+                      width={600}
+                      height={600}
+                      className=" relative h-[150px] w-[150px]"
+                      onClick={() => setBigImage(props.image1)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="description wraper w-1/2">
-            <div className="des._container flex flex-col gap-3">
-              <h1 className="font-bold text-3xl">Premium Solid Teak Bed</h1>
-              <div className="flex gap-4 text-amber-900 font-bold">
-                <h2>★ ★ ★ ★ ★</h2>
-                <h2>108 reviews</h2>
-              </div>
-              <div>
-                <h2 className="font-bold text-xl font-sp">රු. 28500</h2>
-                <h4>
-                  Shop now at Slashed Price (29% OFF) with coupon GIFTMASF
-                </h4>
-              </div>
-              <div className="flex gap-2">
-                <h3>Availability :</h3>
-                <h4 className="text-amber-900 font-bold">In-store ✓</h4>
-              </div>
-              <div className="flex flex-col gap-1">
-                <h3>Size</h3>
-                <select
-                  name="size"
-                  className="border-2 px-3 py-1 rounded-md border-gray-400 max-w-[200px] w-full"
-                >
-                  <option value="">Double</option>
-                  <option value="">Single</option>
-                </select>
-              </div>
-
-              <div className="flex flex-col gap-1">
-                <h3>Quantity</h3>
-                <div className="flex gap-2">
-                  <h4 className="px-2 border-2 rounded-full border-gray-400">
-                    -
-                  </h4>
-                  <h3 className="px-4 border-2 rounded-xl border-gray-400">
-                    1
-                  </h3>
-                  <h4 className="px-2 border-2 rounded-full border-gray-400">
-                    +
+            <div className="description-wraper">
+              <div className="des._container flex flex-col gap-3">
+                <h1 className="font-bold text-3xl">Premium Solid Teak Bed</h1>
+                <div className="flex gap-4 text-amber-900 font-bold">
+                  <h2>★ ★ ★ ★ ★</h2>
+                  <h2>108 reviews</h2>
+                </div>
+                <div>
+                  <h2 className="font-bold text-xl font-sp">රු. 28500</h2>
+                  <h4>
+                    Shop now at Slashed Price (29% OFF) with coupon GIFTMASF
                   </h4>
                 </div>
-              </div>
-              <div className="flex gap-3 text-white font-bold">
-                <button className="bg-amber-900 px-3 py-2 rounded-md border-gray-400 max-w-[200px] w-full">
-                  ADD TO CART
-                </button>
-                <button className="bg-amber-900 px-3 bg py-2 rounded-md border-gray-400 max-w-[200px] w-full">
-                  BUY NOW
-                </button>
+                <div className="flex gap-2">
+                  <h3>Availability :</h3>
+                  <h4 className="text-amber-900 font-bold">In-store ✓</h4>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <h3>Size</h3>
+                  <select
+                    name="size"
+                    className="border-2 px-3 py-1 rounded-md border-gray-400 max-w-[200px] w-full"
+                  >
+                    <option value="">Double</option>
+                    <option value="">Single</option>
+                  </select>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  <h3>Quantity</h3>
+                  <div className="flex gap-2">
+                    <h4 className="px-2 border-2 rounded-full border-gray-400">
+                      -
+                    </h4>
+                    <h3 className="px-4 border-2 rounded-xl border-gray-400">
+                      1
+                    </h3>
+                    <h4 className="px-2 border-2 rounded-full border-gray-400">
+                      +
+                    </h4>
+                  </div>
+                </div>
+                <div className="flex gap-3 text-white font-bold">
+                  <button className="bg-amber-900 px-3 py-2 rounded-md border-gray-400 max-w-[200px] w-full">
+                    ADD TO CART
+                  </button>
+                  <button className="bg-amber-900 px-3 bg py-2 rounded-md border-gray-400 max-w-[200px] w-full">
+                    BUY NOW
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div className="suggesion"></div>
+
+        {/* ***************************************** Item Details ************************************* */}
+
+        <div className="details grid grid-cols-2 gap-5">
+          <div className="information-table min-h-screen">
+            <h2 className="mb-4 text-xl font-bold text-gray-700">
+              Product Information
+            </h2>
+            <div className="text-lg text-gray-600 px-2">
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Category</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.section}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Length</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.length}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Width</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.width}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Height</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.height}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Material</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.material}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Color</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.color}</span>
+                </div>
+              </div>
+              <div className="flex relative justify-between items-center py-2 border-t-2 space-x-4">
+                <div className="px-2 relative text-center font-semibold w-1/3">
+                  <span>Size</span>
+                </div>
+
+                <div className="text-center relative w-2/3 border-l-2">
+                  <span>{props.size}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="description">
+            <h2 className="mb-4 text-xl font-bold text-gray-700">
+              Product Description
+            </h2>
+            <p className="text-gray-600 px-2 text-justify">
+              {props.description}
+            </p>
+          </div>
+        </div>
+        <div className="reviews"></div>
       </div>
     </div>
   );

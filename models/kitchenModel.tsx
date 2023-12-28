@@ -9,6 +9,12 @@ const kitchenUploads = new Schema(
     image4: String,
     image5: String,
     price: Number,
+    length: String,
+    width: String,
+    height: String,
+    material: String,
+    color: String,
+    size: String,
     description: String,
   },
   { timestamps: true }
