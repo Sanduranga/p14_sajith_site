@@ -1,4 +1,4 @@
-import Bathroom from "@/components/bathroom";
+import Bathroom from "@/components/Bathroom";
 import React from "react";
 
 const BathroomItems = () => {
