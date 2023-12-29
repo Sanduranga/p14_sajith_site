@@ -1,10 +1,9 @@
-import { itemTypes } from "@/components/AddItemForm";
 import ClickedPage from "@/components/ClickedPage";
 
 const getItemById = async (id: string, category: string) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/wood_hub/${id}?category=${category}`,
+      `${process.env.NEXT_URL}/api/wood_hub/${id}?category=${category}`,
       {
         cache: "no-store",
       }

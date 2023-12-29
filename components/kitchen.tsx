@@ -7,7 +7,7 @@ import Image from "next/image";
 const itemsData = async () => {
   try {
     const res = await fetch(
-      "http://localhost:3000/api/wood_hub?category=kitchen",
+      `${process.env.NEXT_URL}/api/wood_hub?category=kitchen`,
       {
         cache: "no-store",
       }
