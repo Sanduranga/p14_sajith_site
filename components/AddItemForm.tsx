@@ -45,31 +45,28 @@ const AddItemForm = () => {
     console.log(input);
 
     try {
-      const res = await fetch(
-        `${process.env.NEXT_URL}/api/wood_hub?category=${section}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-          },
-          body: JSON.stringify({
-            section,
-            image1,
-            image2,
-            image3,
-            image4,
-            image5,
-            price,
-            length,
-            width,
-            height,
-            material,
-            color,
-            size,
-            description,
-          }),
-        }
-      );
+      const res = await fetch(`/api/wood_hub?category=${section}`, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          section,
+          image1,
+          image2,
+          image3,
+          image4,
+          image5,
+          price,
+          length,
+          width,
+          height,
+          material,
+          color,
+          size,
+          description,
+        }),
+      });
       // if (res.ok) {
       //   router.push("/entry-foyer");
       // }
