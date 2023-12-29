@@ -3,7 +3,7 @@ import EditForm from "@/components/EditForm";
 const getItemById = async (id: string, category: string) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/wood_hub/${id}?category=${category}`,
+      `${process.env.NEXT_URL}/api/wood_hub/${id}?category=${category}`,
       {
         cache: "no-store",
       }

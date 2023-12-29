@@ -44,7 +44,7 @@ const EditForm = (props: itemTypes) => {
     } = input;
     try {
       const res = await fetch(
-        `${process.env.NEXT_URL}/api/wood_hub/${props._id}?category=${props.section}`,
+        `/api/wood_hub/${props._id}?category=${props.section}`,
         {
           method: "PUT",
           headers: {
