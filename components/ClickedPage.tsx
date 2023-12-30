@@ -239,6 +239,8 @@ export default function ClickedPage(props: itemTypes) {
             </div>
           </div>
 
+          {/* ***************************************** Product Description ************************************* */}
+
           <div className="description">
             <h2 className="mb-4 text-xl font-bold text-gray-700">
               Product Description

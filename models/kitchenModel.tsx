@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const kitchenUploads = new Schema(
+export const kitchenUploads = new Schema(
   {
     section: String,
     image1: String,

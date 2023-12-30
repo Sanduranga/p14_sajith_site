@@ -8,6 +8,7 @@ import bedroomUploadsModel from "@/models/bedroomModel";
 import officeUploadsModel from "@/models/officeModel";
 import outdoorUploadsModel from "@/models/outdoorModel";
 import bathroomUploadsModel from "@/models/bathroomModel";
+import { cooking_hubC, entry_foyerC } from "@/models/collection";
 
 export async function POST(request: NextRequest) {
   const category = request.nextUrl.searchParams.get("category");
@@ -141,28 +142,53 @@ export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id");
   await connectMongoDB();
   if (category === "entryFoyer") {
-    const items = await entryfoyerUploadModel.find();
+    console.log("*******entryFoyer***********");
+
+    const items = await entryfoyerUploadModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
+  } else if (category === "collection") {
+    try {
+      const kitchenPromise = kitchenUploadsModel.find().sort({ createdAt: -1 });
+      const livingPromise = entryfoyerUploadModel
+        .find()
+        .sort({ createdAt: -1 });
+
+      const [kitchenData, livingData] = await Promise.all([
+        kitchenPromise,
+        livingPromise,
+      ]);
+
+      const combinedData = { kitchen: kitchenData, entryFoyer: livingData };
+
+      return NextResponse.json(combinedData, { status: 200 });
+    } catch (error) {
+      console.error(error);
+
+      console.log(
+        "................Failed to Welcome fetch data*****  :  ",
+        error
+      );
+    }
   } else if (category === "kitchen") {
-    const items = await kitchenUploadsModel.find();
+    const items = await kitchenUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "living") {
-    const items = await livinguploadsModel.find();
+    const items = await livinguploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "dining") {
-    const items = await diningUploadsModel.find();
+    const items = await diningUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "bedroom") {
-    const items = await bedroomUploadsModel.find();
+    const items = await bedroomUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "office") {
-    const items = await officeUploadsModel.find();
+    const items = await officeUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "bathroom") {
-    const items = await bathroomUploadsModel.find();
+    const items = await bathroomUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   } else if (category === "outdoor") {
-    const items = await outdoorUploadsModel.find();
+    const items = await outdoorUploadsModel.find().sort({ createdAt: -1 });
     return NextResponse.json({ items }, { status: 200 });
   }
 }

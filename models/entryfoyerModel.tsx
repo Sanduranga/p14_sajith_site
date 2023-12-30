@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const entryFoyerUploads = new Schema(
+export const entryFoyerUploads = new Schema(
   {
     section: String,
     image1: String,
