@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import woodItemSlice from "./features/woodItems/woodItemSlice";
+import welcomePageSlice from "./features/woodItems/welcomePageSlice";
 
 const store = configureStore({
   reducer: {
-    products: woodItemSlice,
+    welcomePage: welcomePageSlice,
   },
 });
 

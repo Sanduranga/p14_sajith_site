@@ -3,6 +3,7 @@ import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
+import { useSelector } from "react-redux";
 
 const itemsData = async () => {
   try {
@@ -26,7 +27,6 @@ const EntryFoyer = async () => {
   const userName = "sajith" as string;
   try {
     const { items } = await itemsData();
-    console.log(items);
 
     if (items.length > 0) {
       if (userName === "sajith") {
