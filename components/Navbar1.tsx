@@ -1,8 +1,9 @@
 "use client";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
+import Navbar2 from "./Navbar2";
 
 const Navbar1 = () => {
   const routor = useRouter();
@@ -35,10 +36,13 @@ const Navbar1 = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center p-10 h-10 bg-themeCol">
-      <Link href="/">{/* <Image src={""} alt="logo" /> */}</Link>
+    <nav className="flex justify-between items-center p-10 h-10 bg-themeCol text-white">
+      <Link href="/">
+        {/* <Image src={""} alt="logo" /> */}
+        <div className="font-bold text-3xl">AyuboCeylon</div>
+      </Link>
       <div className="flex gap-5">
-        <div>
+        {/* <div>
           <select name="" id="" onChange={handleChange}>
             <option>Modern Collection</option>
             <option value="entryFoyer">Entry Foyer</option>
@@ -50,7 +54,7 @@ const Navbar1 = () => {
             <option value="outdoor">Outdoor Oasis</option>
             <option value="office">Office Nook</option>
           </select>
-        </div>
+        </div> */}
 
         <Link href="">About us</Link>
         <Link href="#">Sign in</Link>
