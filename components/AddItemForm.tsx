@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 export interface itemTypes {
-  _id?: string;
+  _id: string;
   section: string;
   image1: string;
   image2: string;
@@ -18,6 +18,7 @@ export interface itemTypes {
   material: string;
   color: string;
   size: string;
+  likes: number;
   description: string;
 }
 

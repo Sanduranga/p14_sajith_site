@@ -29,6 +29,7 @@ export async function PUT(
     newMaterial: material,
     newColor: color,
     newSize: size,
+    newLikes: likes,
     newDescription: description,
   } = await request.json();
   await connectMongoDB();
@@ -47,6 +48,7 @@ export async function PUT(
       material,
       color,
       size,
+      likes,
       description,
     });
   } else if (category === "kitchen") {
@@ -64,6 +66,7 @@ export async function PUT(
       material,
       color,
       size,
+      likes,
       description,
     });
   } else if (category === "living") {

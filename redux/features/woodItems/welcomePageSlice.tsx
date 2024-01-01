@@ -1,3 +1,4 @@
+import { itemTypes } from "@/components/AddItemForm";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 export const fetchAllItems = createAsyncThunk(
@@ -16,16 +17,8 @@ export const fetchAllItems = createAsyncThunk(
 
 export type categoryTypes = {
   isLoading: boolean;
-  allItems: [];
+  allItems: itemTypes[];
   likes: {};
-  living: [];
-  kitchen: [];
-  bathroom: [];
-  outdoor: [];
-  entryFoyer: [];
-  bedroom: [];
-  office: [];
-  dining: [];
   error: string;
 };
 
@@ -44,7 +37,8 @@ const welcomePageSlice = createSlice({
       state.allItems = action.payload;
     },
     putLikes: (state, action) => {
-      state.likes = action.payload;
+      let aa = state.allItems;
+      aa[action.payload].likes += 1;
     },
   },
   extraReducers(builder) {
@@ -53,7 +47,7 @@ const welcomePageSlice = createSlice({
     }),
       builder.addCase(
         fetchAllItems.fulfilled,
-        (state, action: PayloadAction<any>) => {
+        (state, action: PayloadAction<itemTypes[]>) => {
           state.allItems = action.payload;
           state.isLoading = false;
         }

@@ -40,6 +40,7 @@ export default async function EditItem({
     material,
     color,
     size,
+    likes,
     description,
   } = item;
 
@@ -59,6 +60,7 @@ export default async function EditItem({
       material={material}
       color={color}
       size={size}
+      likes={likes}
       description={description}
     />
   );

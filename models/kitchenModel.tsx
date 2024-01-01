@@ -15,6 +15,7 @@ export const kitchenUploads = new Schema(
     material: String,
     color: String,
     size: String,
+    likes: Number,
     description: String,
   },
   { timestamps: true }
