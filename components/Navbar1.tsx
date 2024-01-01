@@ -35,10 +35,8 @@ const Navbar1 = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center p-10 h-10 bg-red-200">
-      <Link href="/">
-        <Image src={""} alt="logo" />
-      </Link>
+    <nav className="flex justify-between items-center p-10 h-10 bg-themeCol">
+      <Link href="/">{/* <Image src={""} alt="logo" /> */}</Link>
       <div className="flex gap-5">
         <div>
           <select name="" id="" onChange={handleChange}>

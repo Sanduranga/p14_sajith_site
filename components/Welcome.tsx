@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
@@ -11,6 +11,7 @@ import { RootState } from "@/redux/Store";
 const Welcome = () => {
   const userName = "sajith" as string;
   const dispatch = useDispatch();
+  const focusRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     console.log("useEffect");
@@ -25,60 +26,43 @@ const Welcome = () => {
   const setBigImage = (image: string, index: number) => {
     setImage({ image, index });
   };
+  const likes = 4;
+  const handleLike = (id?: string) => {};
 
   try {
     if (data.length > 0) {
       if (userName === "sjith") {
         return (
-          <div className="flex flex-wrap gap-5">
+          <div ref={focusRef} className="flex flex-wrap gap-5">
             <Link
-              className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
+              className="flex w-fit p-1 rounded-md mx-auto my-5 text-white"
               href={"/addItem/entryFoyer"}
             >
               ADD ITEM
             </Link>
-            <div className="flex flex-col-3 flex-wrap gap-5">
-              {data.map((item: any) => (
-                <div
-                  key={item._id}
-                  className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
-                >
-                  <Link href={`clicked-item/${item._id}/${item.section}`}>
-                    <div className=" bg-red-300">
-                      <Image
-                        src={item.image1}
-                        alt="itemImg"
-                        width={750}
-                        height={500}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="text-center">Rs. {item.price}</div>
-                  </Link>
-                  <div className="flex justify-between">
-                    <DeleteButton id={item._id} category={item.section} />
-                    <Link
-                      className="p-1 rounded-md bg-blue-500 text-white"
-                      href={`editItem/${item._id}/${item.section}`}
-                    >
-                      Edit
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         );
       } else {
         return (
           <div className="flex flex-col gap-5">
+            <div className="flex flex-wrap gap-5">
+              <Link
+                className="flex w-fit p-1 rounded-md mx-auto my-5 text-white"
+                href={"/addItem/entryFoyer"}
+              >
+                ADD ITEM
+              </Link>
+            </div>
             {data.map((item: itemTypes, i) => (
               <div
                 key={i}
                 className="flex flex-col p-2 gap-2 justify-center bg-green-500"
               >
-                <div className="img-contain w-[60dvw] p-5 mx-auto bg-blue-700">
-                  <div className="bg-red-500 p-3">
+                <div className="contain flex flex-col w-[60dvw] p-3 gap-5 mx-auto bg-blue-700">
+                  <div
+                    ref={bigImage?.index === i ? focusRef : undefined}
+                    className="bg-red-500 p-3"
+                  >
                     <Link href={`clicked-item/${item._id}/${item.section}`}>
                       <Image
                         src={
@@ -101,7 +85,10 @@ const Welcome = () => {
                       height={600}
                       objectFit="cover"
                       className={`${item.image2 ? "cursor-pointer" : "hidden"}`}
-                      onClick={() => setBigImage(item.image2, i)}
+                      onClick={() => {
+                        focusRef.current?.focus();
+                        setBigImage(item.image2, i);
+                      }}
                     />
 
                     <Image
@@ -112,7 +99,10 @@ const Welcome = () => {
                       height={600}
                       objectFit="contain"
                       className={`${item.image3 ? "cursor-pointer" : "hidden"}`}
-                      onClick={() => setBigImage(item.image3, i)}
+                      onClick={() => {
+                        focusRef.current?.focus();
+                        setBigImage(item.image3, i);
+                      }}
                     />
 
                     <Image
@@ -147,6 +137,13 @@ const Welcome = () => {
                       className={`${item.image1 ? "cursor-pointer" : "hidden"}`}
                       onClick={() => setBigImage(item.image1, i)}
                     />
+                  </div>
+                  <div className="flex justify-evenly">
+                    <button onClick={() => handleLike(item._id)}>
+                      Like <span className="ml-1">{likes}</span>
+                    </button>
+                    <button>Whtapp</button>
+                    <button>explore</button>
                   </div>
                 </div>
               </div>
