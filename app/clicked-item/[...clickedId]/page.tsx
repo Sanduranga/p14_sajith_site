@@ -34,6 +34,7 @@ export default async function ClickedItem({
   const { item } = await getItemById(id, category);
 
   const {
+    _id,
     section,
     image1,
     image2,
@@ -47,11 +48,13 @@ export default async function ClickedItem({
     material,
     color,
     size,
+    likes,
     description,
   } = item;
 
   return (
     <ClickedPage
+      _id={_id}
       section={section}
       image1={image1}
       image2={image2}
@@ -65,6 +68,7 @@ export default async function ClickedItem({
       material={material}
       color={color}
       size={size}
+      likes={likes}
       description={description}
     />
   );
