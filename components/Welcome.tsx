@@ -15,14 +15,15 @@ import Navbar2 from "./Navbar2";
 const Welcome = () => {
   const userName = "sajith" as string;
   const dispatch = useDispatch();
-  const focusRef = useRef<HTMLDivElement>(null);
-
+  const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  // **********************************************************************************
   useEffect(() => {
-    console.log("useEffect");
-
     dispatch(fetchAllItems() as any);
   }, [dispatch]);
+  // **********************************************************************************
+  const [bigImage, setImage] = useState<{ image: string; index: number }>();
 
+  // *********************************************************************************
   const data = useSelector(
     (state: RootState) => state.welcomePage.allItems
   ) as [];
@@ -30,13 +31,20 @@ const Welcome = () => {
     (state: RootState) => state.welcomePage.isLoading
   ) as boolean;
 
-  const [bigImage, setImage] = useState<{ image: string; index: number }>();
+  // *********************************************************************************
 
-  console.log("jsx");
   const setBigImage = (image: string, index: number) => {
     setImage({ image, index });
+    if (itemRefs.current[index]) {
+      itemRefs.current[index]!.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align to the bottom
+        inline: "center", // Align to the nearest edge
+      });
+    }
   };
 
+  // *********************************************************************************
   const handleLikes = (
     _id: string,
     category: string,
@@ -63,7 +71,7 @@ const Welcome = () => {
         <div className="w-[80vw]">
           {data.length ? (
             userName === "sjith" ? (
-              <div ref={focusRef} className="flex flex-wrap gap-5">
+              <div className="flex flex-wrap gap-5">
                 <Link
                   className="flex w-fit p-1 rounded-md mx-auto my-5 text-white"
                   href={"/addItem/entryFoyer"}
@@ -79,11 +87,11 @@ const Welcome = () => {
                     className="flex flex-col gap-2 justify-center bg-green-500"
                   >
                     <div className="contain flex flex-col w-[60dvw] p-3 gap-5 mx-auto bg-blue-700">
-                      <div
-                        ref={bigImage?.index === i ? focusRef : undefined}
-                        className="bg-red-500 p-3"
-                      >
-                        <Link href={`clicked-item/${item._id}/${item.section}`}>
+                      <div className="bg-red-500 p-3">
+                        <Link
+                          ref={(ref) => (itemRefs.current[i] = ref)}
+                          href={`clicked-item/${item._id}/${item.section}`}
+                        >
                           <Image
                             src={
                               bigImage?.index === i
@@ -110,7 +118,6 @@ const Welcome = () => {
                             item.image2 ? "cursor-pointer" : "hidden"
                           }`}
                           onClick={() => {
-                            focusRef.current?.focus();
                             setBigImage(item.image2, i);
                           }}
                         />
@@ -126,7 +133,6 @@ const Welcome = () => {
                             item.image3 ? "cursor-pointer" : "hidden"
                           }`}
                           onClick={() => {
-                            focusRef.current?.focus();
                             setBigImage(item.image3, i);
                           }}
                         />
