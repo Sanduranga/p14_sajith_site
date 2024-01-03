@@ -19,13 +19,12 @@ const EntryFoyer = () => {
     (state: RootState) => state.welcomePage.entryitems
   );
 
-  const [a, setA] = useState(true);
   const userName = "sajith" as string;
 
-  return (
-    <div>
-      {entryItems.length ? (
-        userName === "sajith" ? (
+  try {
+    return (
+      <div>
+        {userName === "sajith" ? (
           <div>
             <Link
               className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
@@ -86,23 +85,25 @@ const EntryFoyer = () => {
               </div>
             ))}
           </div>
-        )
-      ) : (
-        <div>
-          <Link
-            className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
-            href={"/addItem/entryFoyer"}
-          >
-            ADD ITEM
-          </Link>
+        )}
+      </div>
+    );
+  } catch (error) {
+    return (
+      <div>
+        <Link
+          className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
+          href={"/addItem/entryFoyer"}
+        >
+          ADD ITEM
+        </Link>
 
-          <div className="flex w-fit mx-auto font-bold">
-            There are no Entry foyer items to show
-          </div>
+        <div className="flex w-fit mx-auto font-bold">
+          There are no Entry foyer items to show
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
 export default EntryFoyer;
