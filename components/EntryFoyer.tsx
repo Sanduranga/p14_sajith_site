@@ -14,7 +14,6 @@ const EntryFoyer = () => {
   const entryItems: itemTypes[] = allItems.filter(
     (sec) => sec.section === "entryFoyer"
   );
-  console.log(entryItems);
 
   const userName = "sajith" as string;
 
