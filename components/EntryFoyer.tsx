@@ -1,30 +1,46 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/Store";
-import { useEffect, useState } from "react";
-import { getEntryItems } from "@/redux/features/woodItems/welcomePageSlice";
+import { useSelector } from "react-redux";
+
+// const itemsData = async () => {
+//   try {
+//     const res = await fetch(
+//       `${process.env.NEXT_URL}/api/wood_hub?category=entryFoyer`,
+//       {
+//         cache: "no-store",
+//       }
+//     );
+//     if (!res.ok) {
+//       alert("Faild to fetch Entry Foyer items");
+//     }
+
+//     return res.json();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const EntryFoyer = () => {
-  const dispatch = useDispatch();
+  const [entryIemes, setIEntryItems] = useState([]);
   useEffect(() => {
-    dispatch(getEntryItems());
-  }, [dispatch]);
-
-  const entryItems: itemTypes[] = useSelector(
-    (state: RootState) => state.welcomePage.entryitems
-  );
+    fetch(`/api/wood_hub?category=entryFoyer`, {
+      cache: "no-store",
+    })
+      .then((res) => res.json())
+      .then((data) => setIEntryItems(data.items));
+  }, []);
 
   const userName = "sajith" as string;
 
-  try {
-    return (
-      <div>
-        {userName === "sajith" ? (
+  return (
+    <div>
+      {entryIemes.length ? (
+        userName === "sajith" ? (
           <div>
             <Link
               className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
@@ -33,7 +49,7 @@ const EntryFoyer = () => {
               ADD ITEM
             </Link>
             <div className="flex flex-col-3 flex-wrap gap-5">
-              {entryItems.map((item: itemTypes) => (
+              {entryIemes.map((item: itemTypes) => (
                 <div
                   key={item._id}
                   className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
@@ -65,7 +81,7 @@ const EntryFoyer = () => {
           </div>
         ) : (
           <div className="flex flex-wrap gap-5">
-            {entryItems.map((item: itemTypes) => (
+            {entryIemes.map((item: itemTypes) => (
               <div
                 key={item._id}
                 className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
@@ -85,25 +101,23 @@ const EntryFoyer = () => {
               </div>
             ))}
           </div>
-        )}
-      </div>
-    );
-  } catch (error) {
-    return (
-      <div>
-        <Link
-          className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
-          href={"/addItem/entryFoyer"}
-        >
-          ADD ITEM
-        </Link>
+        )
+      ) : (
+        <div>
+          <Link
+            className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
+            href={"/addItem/entryFoyer"}
+          >
+            ADD ITEM
+          </Link>
 
-        <div className="flex w-fit mx-auto font-bold">
-          There are no Entry foyer items to show
+          <div className="flex w-fit mx-auto font-bold">
+            There are no Entry foyer items to show
+          </div>
         </div>
-      </div>
-    );
-  }
+      )}
+    </div>
+  );
 };
 
 export default EntryFoyer;

@@ -19,6 +19,7 @@ const Welcome = () => {
   // **********************************************************************************
   useEffect(() => {
     dispatch(fetchAllItems() as any);
+    console.log("rendering");
   }, [dispatch]);
   // **********************************************************************************
   const [bigImage, setImage] = useState<{ image: string; index: number }>();
@@ -107,74 +108,86 @@ const Welcome = () => {
                         </Link>
                       </div>
                       <div className="grid grid-cols-5 gap-3 mx-auto bg-purple-700">
-                        <Image
-                          src={item.image2}
-                          alt="Img"
-                          layout="responsive"
-                          width={600}
-                          height={600}
-                          objectFit="cover"
+                        <div
                           className={`${
                             item.image2 ? "cursor-pointer" : "hidden"
                           }`}
-                          onClick={() => {
-                            setBigImage(item.image2, i);
-                          }}
-                        />
+                        >
+                          <Image
+                            src={item.image2 ? item.image2 : ""}
+                            alt="Img"
+                            layout="responsive"
+                            width={600}
+                            height={600}
+                            objectFit="cover"
+                            onClick={() => {
+                              setBigImage(item.image2, i);
+                            }}
+                          />
+                        </div>
 
-                        <Image
-                          src={item.image3}
-                          alt="Img"
-                          layout="responsive"
-                          width={600}
-                          height={600}
-                          objectFit="contain"
+                        <div
                           className={`${
                             item.image3 ? "cursor-pointer" : "hidden"
                           }`}
-                          onClick={() => {
-                            setBigImage(item.image3, i);
-                          }}
-                        />
-
-                        <Image
-                          src={item.image4}
-                          alt="Img"
-                          layout="responsive"
-                          width={600}
-                          height={600}
-                          objectFit="contain"
+                        >
+                          <Image
+                            src={item.image3 ? item.image3 : ""}
+                            alt="Img"
+                            layout="responsive"
+                            width={600}
+                            height={600}
+                            objectFit="contain"
+                            onClick={() => {
+                              setBigImage(item.image3, i);
+                            }}
+                          />
+                        </div>
+                        <div
                           className={`${
                             item.image4 ? "cursor-pointer" : "hidden"
                           }`}
-                          onClick={() => setBigImage(item.image4, i)}
-                        />
-
-                        <Image
-                          src={item.image5}
-                          alt="Img"
-                          layout="responsive"
-                          width={600}
-                          height={600}
-                          objectFit="contain"
+                        >
+                          <Image
+                            src={item.image4 ? item.image4 : ""}
+                            alt="Img"
+                            layout="responsive"
+                            width={600}
+                            height={600}
+                            objectFit="contain"
+                            onClick={() => setBigImage(item.image4, i)}
+                          />
+                        </div>
+                        <div
                           className={`${
                             item.image5 ? "cursor-pointer" : "hidden"
                           }`}
-                          onClick={() => setBigImage(item.image5, i)}
-                        />
-
-                        <Image
-                          src={item.image1}
-                          alt="Img"
-                          layout="responsive"
-                          width={600}
-                          height={600}
-                          objectFit="contain"
+                        >
+                          <Image
+                            src={item.image5 ? item.image5 : ""}
+                            alt="Img"
+                            layout="responsive"
+                            width={600}
+                            height={600}
+                            objectFit="contain"
+                            onClick={() => setBigImage(item.image5, i)}
+                          />
+                        </div>
+                        <div
                           className={`${
                             item.image1 ? "cursor-pointer" : "hidden"
                           }`}
-                          onClick={() => setBigImage(item.image1, i)}
-                        />
+                        >
+                          <Image
+                            src={item.image1 ? item.image1 : ""}
+                            alt="Img"
+                            layout="responsive"
+                            width={600}
+                            height={600}
+                            objectFit="contain"
+                            onClick={() => setBigImage(item.image1, i)}
+                          />
+                        </div>
                       </div>
                       <div className="flex justify-evenly">
                         <button
