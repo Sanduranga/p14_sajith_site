@@ -16,6 +16,7 @@ export const fetchAllItems = createAsyncThunk(
 export type categoryTypes = {
   isLoading: boolean;
   allItems: itemTypes[];
+  entryitems: itemTypes[];
   likes: {};
   error: string;
 };
@@ -23,6 +24,7 @@ export type categoryTypes = {
 const initialState = {
   isLoading: false,
   allItems: [],
+  entryitems: [],
   likes: {},
   error: "",
 } as categoryTypes;
@@ -37,6 +39,10 @@ const welcomePageSlice = createSlice({
     putLikes: (state, action) => {
       let aa = state.allItems;
       aa[action.payload].likes += 1;
+    },
+    getEntryItems: (state) => {
+      let aa = state.allItems.filter((sec) => sec.section === "entryFoyer");
+      state.entryitems = aa;
     },
   },
   extraReducers(builder) {
@@ -61,4 +67,4 @@ const welcomePageSlice = createSlice({
 });
 
 export default welcomePageSlice.reducer;
-export const { alldata, putLikes } = welcomePageSlice.actions;
+export const { alldata, putLikes, getEntryItems } = welcomePageSlice.actions;

@@ -4,24 +4,27 @@ import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getEntryItems } from "@/redux/features/woodItems/welcomePageSlice";
 
 const EntryFoyer = () => {
-  useState(() => {});
-  const allItems: itemTypes[] = useSelector(
-    (state: RootState) => state.welcomePage.allItems
-  );
-  const entryItems: itemTypes[] = allItems.filter(
-    (sec) => sec.section === "entryFoyer"
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEntryItems());
+  }, [dispatch]);
+
+  const entryItems: itemTypes[] = useSelector(
+    (state: RootState) => state.welcomePage.entryitems
   );
 
+  const [a, setA] = useState(true);
   const userName = "sajith" as string;
 
   return (
     <div>
-      {allItems.length ? (
+      {entryItems.length ? (
         userName === "sajith" ? (
           <div>
             <Link
