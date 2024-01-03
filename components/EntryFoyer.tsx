@@ -6,8 +6,10 @@ import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import { useState } from "react";
 
 const EntryFoyer = () => {
+  useState(() => {});
   const allItems: itemTypes[] = useSelector(
     (state: RootState) => state.welcomePage.allItems
   );
@@ -19,7 +21,7 @@ const EntryFoyer = () => {
 
   return (
     <div>
-      {entryItems.length ? (
+      {allItems.length ? (
         userName === "sajith" ? (
           <div>
             <Link
