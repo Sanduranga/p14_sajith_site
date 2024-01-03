@@ -4,9 +4,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 export const fetchAllItems = createAsyncThunk(
   "woodItems/fetchData",
   async () => {
-    const res = await fetch(`/api/wood_hub?category=collection`, {
-      cache: "no-cache",
-    });
+    const res = await fetch("/api/wood_hub?category=collection");
     const items = await res.json();
     const kitchen = items.kitchen;
     const entryFoyer = items.entryFoyer;
