@@ -8,13 +8,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
 
 const EntryFoyer = () => {
-  const allItems = useSelector(
+  const allItems: itemTypes[] = useSelector(
     (state: RootState) => state.welcomePage.allItems
   );
   const entryItems: itemTypes[] = allItems.filter(
     (sec) => sec.section === "entryFoyer"
   );
-
+  console.log(allItems);
   console.log(entryItems);
 
   const userName = "sajith" as string;
