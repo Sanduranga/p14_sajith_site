@@ -4,7 +4,9 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 export const fetchAllItems = createAsyncThunk(
   "woodItems/fetchData",
   async () => {
-    const res = await fetch("/api/wood_hub?category=collection");
+    const res = await fetch("/api/wood_hub?category=collection", {
+      cache: "no-cache",
+    });
     const items = await res.json();
     const kitchen = items.kitchen;
     const entryFoyer = items.entryFoyer;
@@ -38,6 +40,8 @@ const welcomePageSlice = createSlice({
     },
     putLikes: (state, action) => {
       let aa = state.allItems;
+      console.log("dispatched");
+
       aa[action.payload].likes += 1;
     },
     getEntryItems: (state) => {

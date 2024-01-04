@@ -6,21 +6,23 @@ import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  alldata,
   fetchAllItems,
   putLikes,
 } from "@/redux/features/woodItems/welcomePageSlice";
 import { RootState } from "@/redux/Store";
 import Navbar2 from "./Navbar2";
 
-const Welcome = () => {
+const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const userName = "sajith" as string;
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   // **********************************************************************************
-  useEffect(() => {
-    dispatch(fetchAllItems() as any);
-    console.log("rendering");
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllItems() as any);
+  //   console.log("rendering");
+  // }, [dispatch]);
+  dispatch(alldata(allItems));
   // **********************************************************************************
   const [bigImage, setImage] = useState<{ image: string; index: number }>();
 

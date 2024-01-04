@@ -28,8 +28,6 @@ export default async function ClickedItem({
 }) {
   const id = params.clickedId[0];
   const category = params.clickedId[1];
-  console.log("clicked-page id =", id);
-  console.log("clicked-page categ =", category);
 
   const { item } = await getItemById(id, category);
 

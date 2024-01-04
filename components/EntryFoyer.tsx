@@ -6,6 +6,7 @@ import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
 import { useSelector } from "react-redux";
+import { RootState } from "@/redux/Store";
 
 // const itemsData = async () => {
 //   try {
@@ -26,20 +27,22 @@ import { useSelector } from "react-redux";
 // };
 
 const EntryFoyer = () => {
-  const [entryIemes, setIEntryItems] = useState([]);
-  useEffect(() => {
-    fetch(`/api/wood_hub?category=entryFoyer`, {
-      cache: "no-store",
-    })
-      .then((res) => res.json())
-      .then((data) => setIEntryItems(data.items));
-  }, []);
+  // const [entryItems, setIEntryItems] = useState([]);
+  // useEffect(() => {
+  //   fetch(`/api/wood_hub?category=entryFoyer`)
+  //     .then((res) => res.json())
+  //     .then((data) => setIEntryItems(data.items));
+  // }, []);
+  const allItems = useSelector(
+    (state: RootState) => state.welcomePage.allItems
+  );
+  const entryItems = allItems.filter((cat) => cat.section === "entryFoyer");
 
   const userName = "sajith" as string;
 
   return (
     <div>
-      {entryIemes.length ? (
+      {entryItems.length ? (
         userName === "sajith" ? (
           <div>
             <Link
@@ -49,7 +52,7 @@ const EntryFoyer = () => {
               ADD ITEM
             </Link>
             <div className="flex flex-col-3 flex-wrap gap-5">
-              {entryIemes.map((item: itemTypes) => (
+              {entryItems.map((item: itemTypes) => (
                 <div
                   key={item._id}
                   className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
@@ -81,7 +84,7 @@ const EntryFoyer = () => {
           </div>
         ) : (
           <div className="flex flex-wrap gap-5">
-            {entryIemes.map((item: itemTypes) => (
+            {entryItems.map((item: itemTypes) => (
               <div
                 key={item._id}
                 className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
