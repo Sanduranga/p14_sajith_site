@@ -40,8 +40,6 @@ const welcomePageSlice = createSlice({
     },
     putLikes: (state, action) => {
       let aa = state.allItems;
-      console.log("dispatched");
-
       aa[action.payload].likes += 1;
     },
     getEntryItems: (state) => {
