@@ -10,29 +10,19 @@ import { RootState } from "@/redux/Store";
 import Navbar2 from "./Navbar2";
 import { AiFillLike } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
+import { FaWhatsappSquare } from "react-icons/fa";
 
 const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const userName = "sajith" as string;
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
-  const likeBtnRef = useRef<Array<HTMLSpanElement | null>>([]);
+
   // **********************************************************************************
-  // useEffect(() => {
-  //   dispatch(fetchAllItems() as any);
-  //   console.log("rendering");
-  // }, [dispatch]);
+
   dispatch(alldata(allItems));
   // **********************************************************************************
   const [bigImage, setImage] = useState<{ image: string; index: number }>();
   const [liked, setLiked] = useState(Array().fill(false));
-
-  // *********************************************************************************
-  // const allItems = useSelector(
-  //   (state: RootState) => state.welcomePage.allItems
-  // ) as [];
-  // const loading = useSelector(
-  //   (state: RootState) => state.welcomePage.isLoading
-  // ) as boolean;
 
   // *********************************************************************************
 
@@ -41,8 +31,8 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
     if (itemRefs.current[index]) {
       itemRefs.current[index]!.scrollIntoView({
         behavior: "smooth",
-        block: "start", // Align to the bottom
-        inline: "center", // Align to the nearest edge
+        block: "center", // Align to the bottom
+        inline: "start", // Align to the nearest edge
       });
     }
   };
@@ -69,12 +59,12 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
       }),
     }).catch((err) => alert(err));
   };
-  console.log(liked);
 
   return (
-    <div className="flex mt-10 px-5">
-      <Navbar2 />
-
+    <div className="flex mt-28 px-5">
+      <div className="w-[20vw]">
+        <Navbar2 />
+      </div>
       <div className="w-[80vw]">
         {allItems.length ? (
           userName === "sjith" ? (
@@ -91,118 +81,136 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
               {allItems.map((item: itemTypes, i) => (
                 <div
                   key={i}
-                  className="contain flex flex-col w-[60dvw] p-3 gap-3 mx-auto bg-gray-200 rounded-md"
+                  className="contain flex justify-between p-3 gap-3 mx-auto bg-gray-200 rounded-md"
                 >
-                  <div>
-                    <Link
-                      ref={(ref) => (itemRefs.current[i] = ref)}
-                      href={`clicked-item/${item._id}/${item.section}`}
-                    >
-                      <Image
-                        src={
-                          bigImage?.index === i ? bigImage.image : item.image1
-                        }
-                        alt="mainImg"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        objectFit="cover"
-                        className="rounded-md"
-                      />
-                    </Link>
-                  </div>
-                  <div className="grid grid-cols-5 gap-3 mx-auto">
-                    <div
-                      className={`${item.image2 ? "cursor-pointer" : "hidden"}`}
-                    >
-                      <Image
-                        src={item.image2 ? item.image2 : ""}
-                        alt="Img"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        className="rounded-md"
-                        objectFit="cover"
-                        onClick={() => {
-                          setBigImage(item.image2, i);
-                        }}
-                      />
+                  <div className="flex flex-col gap-3 w-[50dvw]">
+                    <div>
+                      <Link
+                        ref={(ref) => (itemRefs.current[i] = ref)}
+                        href={`clicked-item/${item._id}/${item.section}`}
+                      >
+                        <Image
+                          src={
+                            bigImage?.index === i ? bigImage.image : item.image1
+                          }
+                          alt="mainImg"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          objectFit="cover"
+                          className="rounded-md"
+                        />
+                      </Link>
                     </div>
+                    <div className="grid grid-cols-5 gap-3 mx-auto rounded-md p-1">
+                      <div
+                        className={`${
+                          item.image2 ? "cursor-pointer" : "hidden"
+                        }`}
+                      >
+                        <Image
+                          src={item.image2 ? item.image2 : ""}
+                          alt="Img"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          className="rounded-md"
+                          objectFit="cover"
+                          onClick={() => {
+                            setBigImage(item.image2, i);
+                          }}
+                        />
+                      </div>
 
-                    <div
-                      className={`${item.image3 ? "cursor-pointer" : "hidden"}`}
-                    >
-                      <Image
-                        src={item.image3 ? item.image3 : ""}
-                        alt="Img"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        className="rounded-md"
-                        objectFit="contain"
-                        onClick={() => {
-                          setBigImage(item.image3, i);
-                        }}
-                      />
-                    </div>
-                    <div
-                      className={`${item.image4 ? "cursor-pointer" : "hidden"}`}
-                    >
-                      <Image
-                        src={item.image4 ? item.image4 : ""}
-                        alt="Img"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        className="rounded-md"
-                        objectFit="contain"
-                        onClick={() => setBigImage(item.image4, i)}
-                      />
-                    </div>
-                    <div
-                      className={`${item.image5 ? "cursor-pointer" : "hidden"}`}
-                    >
-                      <Image
-                        src={item.image5 ? item.image5 : ""}
-                        alt="Img"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        className="rounded-md"
-                        objectFit="contain"
-                        onClick={() => setBigImage(item.image5, i)}
-                      />
-                    </div>
-                    <div
-                      className={`${item.image1 ? "cursor-pointer" : "hidden"}`}
-                    >
-                      <Image
-                        src={item.image1 ? item.image1 : ""}
-                        alt="Img"
-                        layout="responsive"
-                        width={600}
-                        height={600}
-                        className="rounded-md"
-                        objectFit="contain"
-                        onClick={() => setBigImage(item.image1, i)}
-                      />
+                      <div
+                        className={`${
+                          item.image3 ? "cursor-pointer" : "hidden"
+                        }`}
+                      >
+                        <Image
+                          src={item.image3 ? item.image3 : ""}
+                          alt="Img"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          className="rounded-md"
+                          objectFit="contain"
+                          onClick={() => {
+                            setBigImage(item.image3, i);
+                          }}
+                        />
+                      </div>
+                      <div
+                        className={`${
+                          item.image4 ? "cursor-pointer" : "hidden"
+                        }`}
+                      >
+                        <Image
+                          src={item.image4 ? item.image4 : ""}
+                          alt="Img"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          className="rounded-md"
+                          objectFit="contain"
+                          onClick={() => setBigImage(item.image4, i)}
+                        />
+                      </div>
+                      <div
+                        className={`${
+                          item.image5 ? "cursor-pointer" : "hidden"
+                        }`}
+                      >
+                        <Image
+                          src={item.image5 ? item.image5 : ""}
+                          alt="Img"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          className="rounded-md"
+                          objectFit="contain"
+                          onClick={() => setBigImage(item.image5, i)}
+                        />
+                      </div>
+                      <div
+                        className={`${
+                          item.image1 ? "cursor-pointer" : "hidden"
+                        }`}
+                      >
+                        <Image
+                          src={item.image1 ? item.image1 : ""}
+                          alt="Img"
+                          layout="responsive"
+                          width={600}
+                          height={600}
+                          className="rounded-md"
+                          objectFit="contain"
+                          onClick={() => setBigImage(item.image1, i)}
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="flex justify-evenly">
+                  <div className="flex flex-col gap-5 justify-start pt-2">
                     <button
                       onClick={() =>
                         handleLikes(item._id, item.section, item.likes, i)
                       }
-                      className="flex border-2 rounded-md"
+                      className="flex"
                     >
-                      <span className="text-xl">
+                      <span className="text-3xl text-yellow-500">
                         {liked[i] ? <FcLike /> : <AiFillLike />}
                       </span>
 
                       <span className="ml-1">{item.likes}</span>
                     </button>
-                    <button>Whtapp</button>
-                    <button>explore</button>
+                    <span className="px-3 py-2 bg-themeCol rounded-md text-yellow-500 font-semibold hover:translate-x-2 duration-100">
+                      <Link href={`clicked-item/${item._id}/${item.section}`}>
+                        Explore
+                      </Link>
+                    </span>
+                    <button className="text-themeCol text-4xl">
+                      <FaWhatsappSquare />
+                    </button>
                   </div>
                 </div>
               ))}

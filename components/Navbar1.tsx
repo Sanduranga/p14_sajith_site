@@ -36,7 +36,7 @@ const Navbar1 = () => {
   };
 
   return (
-    <nav className="flex justify-between items-center p-10 h-10 bg-themeCol text-white">
+    <nav className="flex fixed w-full top-0 left-1/2 transform -translate-x-1/2 justify-between items-center p-10 h-10 bg-themeCol z-40 text-white">
       <Link href="/">
         {/* <Image src={""} alt="logo" /> */}
         <div className="font-bold text-3xl">AyuboCeylon</div>

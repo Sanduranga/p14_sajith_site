@@ -7,158 +7,144 @@ export default function ClickedPage(props: itemTypes) {
   const [bigImage, setBigImage] = useState(props.image1);
   return (
     <div>
-      <div className="wrapper flex flex-col px-5 gap-10 mx-auto">
+      <div className="wrapper flex flex-col px-5 mt-28 gap-10 mx-auto">
         <div className="main_container">
-          <div className="flex w-full bg-yellow-300 flex-col-2 gap-5">
-            <div className="img-waraper flex flex-col w-[60dvw] bg-blue-700">
-              <div className="img-container flex flex-col gap-5">
-                <div className=" bg-green-600 h-[600px]">
+          <div className="flex w-full bg-gray-200 px-3 py-5 flex-col-2 max-h-[100dvh] rounded-md gap-5">
+            <div className="img-container grid grid-rows-5 gap-3 bg-themeCol p-1 rounded-md w-[60dvw]">
+              <div className="row-span-4">
+                <Image
+                  src={bigImage}
+                  alt="mainImg"
+                  layout="responsive"
+                  width={600}
+                  height={600}
+                  objectFit="contain"
+                  className="h-[350px] relative rounded-md"
+                  // sizes="(min-width: 1540px) 1536px, (min-width: 1280px) 1280px, (min-width: 1040px) 1024px, (min-width: 780px) 768px, (min-width: 680px) 640px, calc(94.44vw + 17px)"
+                />
+              </div>
+              <div className="grid grid-cols-5 row-span-1 bg-gray-200 p-1 rounded-md place-content-center place-items-center w-full relative gap-3 mx-auto">
+                <div
+                  className={`${
+                    props.image2 ? "cursor-pointer relative " : "hidden"
+                  }`}
+                >
                   <Image
-                    src={bigImage}
+                    src={props.image2}
                     alt="mainImg"
-                    layout="responsive"
                     width={600}
                     height={600}
-                    objectFit="contain"
-                    sizes="(min-width: 1540px) 1536px, (min-width: 1280px) 1280px, (min-width: 1040px) 1024px, (min-width: 780px) 768px, (min-width: 680px) 640px, calc(94.44vw + 17px)"
+                    className=" relative object-cover rounded-md"
+                    onClick={() => setBigImage(props.image2)}
                   />
                 </div>
-                <div className="flex justify-center w-full relative gap-3 mx-auto bg-purple-700 h-[150px]">
-                  <div
-                    className={`${
-                      props.image2
-                        ? "cursor-pointer bg-orange-500 relative "
-                        : "hidden"
-                    }`}
-                  >
-                    <Image
-                      src={props.image2}
-                      alt="mainImg"
-                      width={600}
-                      height={600}
-                      className=" relative object-cover h-[150px] w-[150px]"
-                      onClick={() => setBigImage(props.image2)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      props.image3
-                        ? "cursor-pointer bg-orange-500 relative"
-                        : "hidden"
-                    }`}
-                  >
-                    <Image
-                      src={props.image3}
-                      alt="mainImg"
-                      width={600}
-                      height={600}
-                      className=" relative object-cover h-[150px] w-[150px]"
-                      onClick={() => setBigImage(props.image3)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      props.image4
-                        ? "cursor-pointer bg-orange-500 relative"
-                        : "hidden"
-                    }`}
-                  >
-                    <Image
-                      src={props.image4}
-                      alt="mainImg"
-                      width={600}
-                      height={600}
-                      className=" relative object-cover h-[150px] w-[150px]"
-                      onClick={() => setBigImage(props.image4)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      props.image5
-                        ? "cursor-pointer bg-orange-500 relative"
-                        : "hidden"
-                    }`}
-                  >
-                    <Image
-                      src={props.image5}
-                      alt="mainImg"
-                      width={600}
-                      height={600}
-                      className=" relative object-cover h-[150px] w-[150px]"
-                      onClick={() => setBigImage(props.image5)}
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      props.image1
-                        ? "cursor-pointer bg-orange-500 relative"
-                        : "hidden"
-                    }`}
-                  >
-                    <Image
-                      src={props.image1}
-                      alt="mainImg"
-                      width={600}
-                      height={600}
-                      className=" relative object-cover h-[150px] w-[150px]"
-                      onClick={() => setBigImage(props.image1)}
-                    />
-                  </div>
+                <div
+                  className={`${
+                    props.image3 ? "cursor-pointer relative" : "hidden"
+                  }`}
+                >
+                  <Image
+                    src={props.image3}
+                    alt="mainImg"
+                    width={600}
+                    height={600}
+                    className=" relative object-cover rounded-md"
+                    onClick={() => setBigImage(props.image3)}
+                  />
+                </div>
+                <div
+                  className={`${
+                    props.image4 ? "cursor-pointer relative" : "hidden"
+                  }`}
+                >
+                  <Image
+                    src={props.image4}
+                    alt="mainImg"
+                    width={600}
+                    height={600}
+                    className=" relative object-cover rounded-md"
+                    onClick={() => setBigImage(props.image4)}
+                  />
+                </div>
+                <div
+                  className={`${
+                    props.image5 ? "cursor-pointer relative" : "hidden"
+                  }`}
+                >
+                  <Image
+                    src={props.image5}
+                    alt="mainImg"
+                    width={600}
+                    height={600}
+                    className=" relative object-cover rounded-md"
+                    onClick={() => setBigImage(props.image5)}
+                  />
+                </div>
+                <div
+                  className={`${
+                    props.image1 ? "cursor-pointer relative" : "hidden"
+                  }`}
+                >
+                  <Image
+                    src={props.image1}
+                    alt="mainImg"
+                    width={600}
+                    height={600}
+                    className=" relative object-cover rounded-md"
+                    onClick={() => setBigImage(props.image1)}
+                  />
                 </div>
               </div>
             </div>
-            <div className="description-wraper">
-              <div className="des._container flex flex-col gap-3">
-                <h1 className="font-bold text-3xl">Premium Solid Teak Bed</h1>
-                <div className="flex gap-4 text-amber-900 font-bold">
-                  <h2>★ ★ ★ ★ ★</h2>
-                  <h2>108 reviews</h2>
-                </div>
-                <div>
-                  <h2 className="font-bold text-xl font-sp">
-                    රු. {props.price}
-                  </h2>
-                  <h4>
-                    Shop now at Slashed Price (29% OFF) with coupon GIFTMASF
+
+            <div className="des._container flex flex-col gap-3">
+              <h1 className="font-bold text-3xl">Premium Solid Teak Bed</h1>
+              <div className="flex gap-4  text-themeCol font-bold">
+                <h2>★ ★ ★ ★ ★</h2>
+                <h2>108 reviews</h2>
+              </div>
+              <div>
+                <h2 className="font-bold text-xl font-sp">රු. {props.price}</h2>
+                <h4>
+                  Shop now at Slashed Price (29% OFF) with coupon GIFTMASF
+                </h4>
+              </div>
+              <div className="flex gap-2">
+                <h3>Availability :</h3>
+                <h4 className=" text-themeCol font-bold">In-store ✓</h4>
+              </div>
+              <div className="flex flex-col gap-1">
+                <h3>Size</h3>
+                <select
+                  name="size"
+                  className="border-2 px-3 py-1 rounded-md border-gray-400 max-w-[200px] w-full"
+                >
+                  <option value="">Double</option>
+                  <option value="">Single</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <h3>Quantity</h3>
+                <div className="flex gap-2">
+                  <h4 className="px-2 border-2 rounded-full border-gray-400">
+                    -
+                  </h4>
+                  <h3 className="px-4 border-2 rounded-xl border-gray-400">
+                    1
+                  </h3>
+                  <h4 className="px-2 border-2 rounded-full border-gray-400">
+                    +
                   </h4>
                 </div>
-                <div className="flex gap-2">
-                  <h3>Availability :</h3>
-                  <h4 className="text-amber-900 font-bold">In-store ✓</h4>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <h3>Size</h3>
-                  <select
-                    name="size"
-                    className="border-2 px-3 py-1 rounded-md border-gray-400 max-w-[200px] w-full"
-                  >
-                    <option value="">Double</option>
-                    <option value="">Single</option>
-                  </select>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                  <h3>Quantity</h3>
-                  <div className="flex gap-2">
-                    <h4 className="px-2 border-2 rounded-full border-gray-400">
-                      -
-                    </h4>
-                    <h3 className="px-4 border-2 rounded-xl border-gray-400">
-                      1
-                    </h3>
-                    <h4 className="px-2 border-2 rounded-full border-gray-400">
-                      +
-                    </h4>
-                  </div>
-                </div>
-                <div className="flex gap-3 text-white font-bold">
-                  <button className="bg-amber-900 px-3 py-2 rounded-md border-gray-400 max-w-[200px] w-full">
-                    ADD TO CART
-                  </button>
-                  <button className="bg-amber-900 px-3 bg py-2 rounded-md border-gray-400 max-w-[200px] w-full">
-                    BUY NOW
-                  </button>
-                </div>
+              </div>
+              <div className="flex gap-3 text-white font-bold">
+                <button className=" bg-themeCol px-3 py-2 rounded-md border-gray-400 max-w-[200px] w-full">
+                  ADD TO CART
+                </button>
+                <button className=" bg-themeCol px-3 bg py-2 rounded-md border-gray-400 max-w-[200px] w-full">
+                  BUY NOW
+                </button>
               </div>
             </div>
           </div>
