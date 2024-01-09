@@ -13,7 +13,6 @@ import { FcLike } from "react-icons/fc";
 import { FaWhatsappSquare } from "react-icons/fa";
 
 const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
-  const userName = "sajith" as string;
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
 
@@ -60,6 +59,8 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
     }).catch((err) => alert(err));
   };
 
+  const userName = "saji" as string;
+
   return (
     <div className="flex mt-28 px-5">
       <div className="w-[20vw]">
@@ -67,10 +68,10 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
       </div>
       <div className="w-[80vw]">
         {allItems.length ? (
-          userName === "sjith" ? (
-            <div className="flex flex-wrap gap-5">
+          userName === "sajith" ? (
+            <div className="">
               <Link
-                className="flex w-fit p-1 rounded-md mx-auto my-5 text-white"
+                className="flex w-fit px-3 py-2 rounded-md mx-auto my-5 bg-themeCol text-white"
                 href={"/addItem/entryFoyer"}
               >
                 ADD ITEM

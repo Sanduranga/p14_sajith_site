@@ -4,7 +4,7 @@ import Welcome from "@/components/Welcome";
 const getdata = async () => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_URL}/api/wood_hub?category=collection`,
+      `${process.env.NEXTAUTH_URL}/api/wood_hub?category=collection`,
       {
         cache: "no-cache",
       }

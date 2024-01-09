@@ -163,7 +163,7 @@ const AddItemForm = () => {
     <div>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-8 mx-auto w-[400px] p-5 border-2"
+        className="flex flex-col gap-8 mx-auto mt-28 w-[50dvw] p-10 bg-gray-300 rounded-lg border-2"
       >
         <select
           className="border-2 border-black px-2 rounded-md"

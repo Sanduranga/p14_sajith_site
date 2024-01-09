@@ -11,7 +11,7 @@ import { RootState } from "@/redux/Store";
 // const itemsData = async () => {
 //   try {
 //     const res = await fetch(
-//       `${process.env.NEXT_URL}/api/wood_hub?category=entryFoyer`,
+//       `${process.env.NEXTAUTH_URL}/api/wood_hub?category=entryFoyer`,
 //       {
 //         cache: "no-store",
 //       }

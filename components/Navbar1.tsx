@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import Navbar2 from "./Navbar2";
+import { signOut, useSession } from "next-auth/react";
 
 const Navbar1 = () => {
   const routor = useRouter();
+  const { status } = useSession();
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     if (value === "kitchen") {
@@ -57,7 +58,12 @@ const Navbar1 = () => {
         </div> */}
 
         <Link href="">About us</Link>
-        <Link href="#">Sign in</Link>
+
+        {status === "authenticated" ? (
+          <button onClick={() => signOut()}>Sign out</button>
+        ) : (
+          <Link href={"/api/auth/signin"}>Sign in</Link>
+        )}
       </div>
     </nav>
   );
