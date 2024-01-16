@@ -1,7 +1,6 @@
-import { itemTypes } from "@/components/AddItemForm";
 import Welcome from "@/components/Welcome";
 
-const getdata = async () => {
+const getItems = async () => {
   try {
     const res = await fetch(
       `${process.env.NEXTAUTH_URL}/api/wood_hub?category=collection`,
@@ -9,6 +8,7 @@ const getdata = async () => {
         cache: "no-cache",
       }
     );
+
     if (!res.ok) {
       throw new Error();
     }
@@ -19,7 +19,7 @@ const getdata = async () => {
 };
 
 export default async function Home() {
-  const combinedData = await getdata();
+  const combinedData = await getItems();
   const kitchen = combinedData.kitchen;
   const entryFoyer = combinedData.entryFoyer;
   const allItemArray = [...kitchen, ...entryFoyer];

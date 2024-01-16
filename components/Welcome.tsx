@@ -11,10 +11,43 @@ import Navbar2 from "./Navbar2";
 import { AiFillLike } from "react-icons/ai";
 import { FcLike } from "react-icons/fc";
 import { FaWhatsappSquare } from "react-icons/fa";
+import { useSession } from "next-auth/react";
+
+// const getUserData = async () => {
+//   try {
+//     const userData = await fetch(
+//       `${process.env.NEXTAUTH_URL}/api/wood_hub?category=collection`,
+//       {
+//         cache: "no-cache",
+//       }
+//     );
+//     if (!userData.ok) {
+//       throw new Error();
+//     }
+//     return userData.json();
+//   } catch (error) {
+//     console.log("user data error ******************", error);
+//   }
+// };
 
 const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+
+  // **********************************************************************************
+  // const { status } = useSession();
+  // const [userDa, setUser] = useState();
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     fetch("/api/wood_hub?category=users", {
+  //       cache: "no-cache",
+  //     })
+  //       .then((res) => res.json())
+  //       .then((data) => setUser(data.userData))
+  //       .catch((err) => console.log("user data error ******************", err));
+  //   }
+  // }, [status]);
+  // console.log(userDa);
 
   // **********************************************************************************
 
@@ -82,7 +115,7 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
               {allItems.map((item: itemTypes, i) => (
                 <div
                   key={i}
-                  className="contain flex justify-between p-3 gap-3 mx-auto bg-gray-200 rounded-md"
+                  className="contain flex justify-between p-3 gap-3 mx-auto bg-gray-950/20 rounded-md"
                 >
                   <div className="flex flex-col gap-3 w-[50dvw]">
                     <div>

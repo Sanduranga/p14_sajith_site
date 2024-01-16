@@ -43,3 +43,31 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
     bedroom,
     office,
     dining -->
+
+<!-- const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (value === "kitchen") {
+      routor.push("/cooking-hub");
+    }
+    if (value === "living") {
+      routor.push("/family-hub");
+    }
+    if (value === "bedroom") {
+      routor.push("/sleep-sanctuary");
+    }
+    if (value === "dining") {
+      routor.push("/dining-domain");
+    }
+    if (value === "bathroom") {
+      routor.push("/refresh-zone");
+    }
+    if (value === "entryFoyer") {
+      routor.push("/entry-foyer");
+    }
+    if (value === "outdoor") {
+      routor.push("/outdoor-oasis");
+    }
+    if (value === "office") {
+      routor.push("/office-nook");
+    }
+  }; -->

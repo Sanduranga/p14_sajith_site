@@ -43,7 +43,6 @@ const AddItemForm = () => {
       size,
       description,
     } = input;
-    console.log(input);
 
     try {
       const res = await fetch(`/api/wood_hub?category=${section}`, {
@@ -68,9 +67,6 @@ const AddItemForm = () => {
           description,
         }),
       });
-      // if (res.ok) {
-      //   router.push("/entry-foyer");
-      // }
     } catch (error) {
       alert(error);
     }
