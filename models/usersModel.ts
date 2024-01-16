@@ -5,7 +5,7 @@ const users = new Schema(
     userName: { type: String, require: true },
     userEmail: { type: String, require: true },
     userImage: { type: String, require: true },
-    likedItemsIds: Array,
+    likedItemIds: Array,
   },
   { timestamps: true }
 );

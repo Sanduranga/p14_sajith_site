@@ -35,19 +35,6 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
 
   // **********************************************************************************
-  // const { status } = useSession();
-  // const [userDa, setUser] = useState();
-  // useEffect(() => {
-  //   if (status === "authenticated") {
-  //     fetch("/api/wood_hub?category=users", {
-  //       cache: "no-cache",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => setUser(data.userData))
-  //       .catch((err) => console.log("user data error ******************", err));
-  //   }
-  // }, [status]);
-  // console.log(userDa);
 
   // **********************************************************************************
 
@@ -81,6 +68,7 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
     updatedLike[index] = !updatedLike[index];
     setLiked(updatedLike);
     dispatch(putLikes(index));
+    // Updating common cluster..................................................
     fetch(`/api/wood_hub/${_id}?category=${category}`, {
       method: "PUT",
       headers: {
@@ -88,6 +76,16 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
       },
       body: JSON.stringify({
         newLikes,
+      }),
+    }).catch((err) => alert(err));
+    // Updating User cluster....................................................
+    fetch("/api/wood_hub?category=users", {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        likedItemIds: { _id: true },
       }),
     }).catch((err) => alert(err));
   };
