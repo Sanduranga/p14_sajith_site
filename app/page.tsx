@@ -14,7 +14,7 @@ const getItems = async () => {
     }
     return res.json();
   } catch (error) {
-    console.log("all items error ******************", error);
+    console.log("all items error : ******************", error);
   }
 };
 

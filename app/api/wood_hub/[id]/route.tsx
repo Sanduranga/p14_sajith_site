@@ -7,6 +7,7 @@ import kitchenUploadsModel from "@/models/kitchenModel";
 import livinguploadsModel from "@/models/livingModel";
 import officeUploadsModel from "@/models/officeModel";
 import outdoorUploadsModel from "@/models/outdoorModel";
+import userModel from "@/models/usersModel";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function PUT(
@@ -15,128 +16,144 @@ export async function PUT(
 ) {
   const { id } = params;
   const category = request.nextUrl.searchParams.get("category");
-  const {
-    newSection: section,
-    newImage1: image1,
-    newImage2: image2,
-    newImage3: image3,
-    newImage4: image4,
-    newImage5: image5,
-    newPrice: price,
-    newLength: length,
-    newWidth: width,
-    newHeight: height,
-    newMaterial: material,
-    newColor: color,
-    newSize: size,
-    newLikes: likes,
-    newDescription: description,
-  } = await request.json();
-  await connectMongoDB();
-  if (category === "entryFoyer") {
-    await entryfoyerUploadModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      length,
-      width,
-      height,
-      material,
-      color,
-      size,
-      likes,
-      description,
-    });
-  } else if (category === "kitchen") {
-    await kitchenUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      length,
-      width,
-      height,
-      material,
-      color,
-      size,
-      likes,
-      description,
-    });
-  } else if (category === "living") {
-    await livinguploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  } else if (category === "bedroom") {
-    await bedroomUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  } else if (category === "dining") {
-    await diningUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  } else if (category === "outdoor") {
-    await outdoorUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  } else if (category === "office") {
-    await officeUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
-  } else if (category === "bathroom") {
-    await bathroomUploadsModel.findByIdAndUpdate(id, {
-      section,
-      image1,
-      image2,
-      image3,
-      image4,
-      image5,
-      price,
-      description,
-    });
+  if (category === "users") {
+    const { NewLikedItemIds: likedItemIds } = await request.json();
+    await connectMongoDB();
+    await userModel.findOneAndUpdate(
+      { userEmail: id },
+      {
+        likedItemIds,
+      }
+    );
+
+    return NextResponse.json(
+      { message: "User_liked_updated" },
+      { status: 200 }
+    );
+  } else {
+    const {
+      newSection: section,
+      newImage1: image1,
+      newImage2: image2,
+      newImage3: image3,
+      newImage4: image4,
+      newImage5: image5,
+      newPrice: price,
+      newLength: length,
+      newWidth: width,
+      newHeight: height,
+      newMaterial: material,
+      newColor: color,
+      newSize: size,
+      newLikes: likes,
+      newDescription: description,
+    } = await request.json();
+    await connectMongoDB();
+    if (category === "entryFoyer") {
+      await entryfoyerUploadModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        length,
+        width,
+        height,
+        material,
+        color,
+        size,
+        likes,
+        description,
+      });
+    } else if (category === "kitchen") {
+      await kitchenUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        length,
+        width,
+        height,
+        material,
+        color,
+        size,
+        likes,
+        description,
+      });
+    } else if (category === "living") {
+      await livinguploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    } else if (category === "bedroom") {
+      await bedroomUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    } else if (category === "dining") {
+      await diningUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    } else if (category === "outdoor") {
+      await outdoorUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    } else if (category === "office") {
+      await officeUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    } else if (category === "bathroom") {
+      await bathroomUploadsModel.findByIdAndUpdate(id, {
+        section,
+        image1,
+        image2,
+        image3,
+        image4,
+        image5,
+        price,
+        description,
+      });
+    }
+    return NextResponse.json({ message: "Item Updated" }, { status: 200 });
   }
-  return NextResponse.json({ message: "Item Updated" }, { status: 200 });
 }
 
 //***********************  GET ONE ***************************************************
@@ -148,7 +165,10 @@ export async function GET(
   const category = request.nextUrl.searchParams.get("category");
   const { id } = params;
   await connectMongoDB();
-  if (category === "entryFoyer") {
+  if (category === "users") {
+    const user = await userModel.findOne({ userEmail: id });
+    return NextResponse.json({ user }, { status: 200 });
+  } else if (category === "entryFoyer") {
     const item = await entryfoyerUploadModel.findOne({ _id: id });
     return NextResponse.json({ item }, { status: 200 });
   } else if (category === "kitchen") {

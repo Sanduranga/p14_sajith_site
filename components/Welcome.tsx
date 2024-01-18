@@ -5,7 +5,12 @@ import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
-import { alldata, putLikes } from "@/redux/features/woodItems/welcomePageSlice";
+import {
+  alldata,
+  putLikes,
+  putUserLikes,
+  userData,
+} from "@/redux/features/woodItems/welcomePageSlice";
 import { RootState } from "@/redux/Store";
 import Navbar2 from "./Navbar2";
 import { AiFillLike } from "react-icons/ai";
@@ -13,37 +18,50 @@ import { FcLike } from "react-icons/fc";
 import { FaWhatsappSquare } from "react-icons/fa";
 import { useSession } from "next-auth/react";
 
-// const getUserData = async () => {
-//   try {
-//     const userData = await fetch(
-//       `${process.env.NEXTAUTH_URL}/api/wood_hub?category=collection`,
-//       {
-//         cache: "no-cache",
-//       }
-//     );
-//     if (!userData.ok) {
-//       throw new Error();
-//     }
-//     return userData.json();
-//   } catch (error) {
-//     console.log("user data error ******************", error);
-//   }
-// };
+export interface userTypes {
+  _id: string;
+  userName: string;
+  userEmail: string;
+  userImage: string;
+  likedItemIds: string[];
+  createdAt: string;
+  updatedAt: string;
+  __v: string;
+}
 
 const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
-
-  // **********************************************************************************
-
-  // **********************************************************************************
-
-  dispatch(alldata(allItems));
-  // **********************************************************************************
+  const { status, data: session } = useSession();
+  const [uData, setUData] = useState({
+    _id: "",
+    userName: "",
+    userEmail: "",
+    userImage: "",
+    likedItemIds: [],
+  }); // To store user data
   const [bigImage, setImage] = useState<{ image: string; index: number }>();
-  const [liked, setLiked] = useState(Array().fill(false));
 
-  // *********************************************************************************
+  const allItemsRedux = useSelector(
+    (state: RootState) => state.welcomePage.allItems
+  );
+  const userDataRedux = useSelector(
+    (state: RootState) => state.welcomePage.userData
+  );
+  const userLikedItems: string[] = [...userDataRedux.likedItemIds]; // Creating an user liked items array
+
+  // **********************************************************************************
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetch(`/api/wood_hub/${session?.user?.email}?category=users`, {
+        cache: "no-cache",
+      })
+        .then((res) => res.json())
+        .then((data) => dispatch(userData(data.user))); // Fetching user data
+    }
+    dispatch(alldata(allItems));
+  }, [status, session, dispatch, allItems]);
+  // **********************************************************************************
 
   const setBigImage = (image: string, index: number) => {
     setImage({ image, index });
@@ -56,38 +74,55 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
     }
   };
 
-  // *********************************************************************************
+  // ************************** Handling Like button *******************************************************
   const handleLikes = (
     _id: string,
     category: string,
     likes: number,
     index: number
   ) => {
-    let newLikes = likes + 1;
-    const updatedLike = [...liked];
-    updatedLike[index] = !updatedLike[index];
-    setLiked(updatedLike);
-    dispatch(putLikes(index));
-    // Updating common cluster..................................................
-    fetch(`/api/wood_hub/${_id}?category=${category}`, {
+    // Here, checks the clicked event whether the user liked one or not previously
+    if (userDataRedux.likedItemIds.includes(_id)) {
+      let toUnlike = userLikedItems.indexOf(_id); // Here I have to use `userLikeItems` (copy of `userDataRedux.likedItemIds`). Because otherwise I can not directly mutate (splice, push()...etc) redux state in Welcome page.
+      userLikedItems.splice(toUnlike, 1);
+      dispatch(putLikes({ id: index, logic: "minus" })); // Updating the count of likes
+      // Updating ${category} cluster..................................................
+      let newLikes = likes - 1;
+      fetch(`/api/wood_hub/${_id}?category=${category}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          newLikes,
+        }),
+      }).catch((err) => alert(`Common liked error: ${err}`));
+    } else {
+      userLikedItems.push(_id);
+      dispatch(putLikes({ id: index, logic: "plus" })); // Updating the count of likes
+      // Updating ${category} cluster..................................................
+      let newLikes = likes + 1;
+      fetch(`/api/wood_hub/${_id}?category=${category}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          newLikes,
+        }),
+      }).catch((err) => alert(`Common liked error: ${err}`));
+    }
+    dispatch(putUserLikes(userLikedItems)); // Here due to dispatch `userDataRedux` state is updated. Due to update, Welcome page should be re rendered. Then (`if (userDataRedux.likedItemIds.includes(_id)){}`) logic also immediately updated to new version and even though user clicks several times Liked button at once, logic works as we expect.
+    // ************ Updating ${category} cluster..................................................
+    fetch(`/api/wood_hub/${session?.user?.email}?category=users`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify({
-        newLikes,
+        NewLikedItemIds: userLikedItems,
       }),
-    }).catch((err) => alert(err));
-    // Updating User cluster....................................................
-    fetch("/api/wood_hub?category=users", {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        likedItemIds: { _id: true },
-      }),
-    }).catch((err) => alert(err));
+    }).catch((err) => alert(`User liked error: ${err}`));
   };
 
   const userName = "saji" as string;
@@ -110,7 +145,7 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
             </div>
           ) : (
             <div className="flex flex-col mx-auto gap-5">
-              {allItems.map((item: itemTypes, i) => (
+              {allItemsRedux.map((item: itemTypes, i) => (
                 <div
                   key={i}
                   className="contain flex justify-between p-3 gap-3 mx-auto bg-gray-950/20 rounded-md"
@@ -229,9 +264,22 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
                       }
                       className="flex"
                     >
-                      <span className="text-3xl text-yellow-500">
-                        {liked[i] ? <FcLike /> : <AiFillLike />}
-                      </span>
+                      {/* Here checks whether there is authenticated users' personal likes items or not. */}
+                      {status === "authenticated" ? (
+                        userLikedItems.includes(item._id) ? (
+                          <span className="text-3xl text-yellow-500">
+                            {<FcLike />}
+                          </span>
+                        ) : (
+                          <span className="text-3xl text-yellow-500">
+                            {<AiFillLike />}
+                          </span>
+                        )
+                      ) : (
+                        <span className="text-3xl text-yellow-500">
+                          {<AiFillLike />}
+                        </span>
+                      )}
 
                       <span className="ml-1">{item.likes}</span>
                     </button>

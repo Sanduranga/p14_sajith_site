@@ -1,4 +1,5 @@
 import { itemTypes } from "@/components/AddItemForm";
+import { userTypes } from "@/components/Welcome";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 export const fetchAllItems = createAsyncThunk(
@@ -18,16 +19,32 @@ export const fetchAllItems = createAsyncThunk(
 export type categoryTypes = {
   isLoading: boolean;
   allItems: itemTypes[];
-  entryitems: itemTypes[];
-  likes: {};
+  userData: {
+    _id: string;
+    userName: string;
+    userEmail: string;
+    userImage: string;
+    likedItemIds: string[];
+    createdAt: string;
+    updatedAt: string;
+    __v: string;
+  };
   error: string;
 };
 
 const initialState = {
   isLoading: false,
   allItems: [],
-  entryitems: [],
-  likes: {},
+  userData: {
+    _id: "",
+    userName: "",
+    userEmail: "",
+    userImage: "",
+    likedItemIds: [],
+    createdAt: "",
+    updatedAt: "",
+    __v: "",
+  },
   error: "",
 } as categoryTypes;
 
@@ -38,13 +55,18 @@ const welcomePageSlice = createSlice({
     alldata: (state, action) => {
       state.allItems = action.payload;
     },
-    putLikes: (state, action) => {
-      let aa = state.allItems;
-      aa[action.payload].likes += 1;
+    userData: (state, action) => {
+      state.userData = action.payload;
     },
-    getEntryItems: (state) => {
-      let aa = state.allItems.filter((sec) => sec.section === "entryFoyer");
-      state.entryitems = aa;
+    putLikes: (state, action) => {
+      if (action.payload.logic === "plus") {
+        state.allItems[action.payload.id].likes += 1;
+      } else {
+        state.allItems[action.payload.id].likes -= 1;
+      }
+    },
+    putUserLikes: (state, action) => {
+      state.userData.likedItemIds = action.payload;
     },
   },
   extraReducers(builder) {
@@ -69,4 +91,5 @@ const welcomePageSlice = createSlice({
 });
 
 export default welcomePageSlice.reducer;
-export const { alldata, putLikes, getEntryItems } = welcomePageSlice.actions;
+export const { alldata, putLikes, userData, putUserLikes } =
+  welcomePageSlice.actions;

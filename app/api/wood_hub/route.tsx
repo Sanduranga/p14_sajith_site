@@ -159,10 +159,7 @@ export async function GET(request: NextRequest) {
     const userData = await userModel.find();
     return NextResponse.json({ userData }, { status: 200 });
   } else {
-    if (category === "entryFoyer") {
-      const items = await entryfoyerUploadModel.find().sort({ createdAt: -1 });
-      return NextResponse.json({ items }, { status: 200 });
-    } else if (category === "collection") {
+    if (category === "collection") {
       try {
         const kitchenPromise = kitchenUploadsModel
           .find()
@@ -187,6 +184,9 @@ export async function GET(request: NextRequest) {
           error
         );
       }
+    } else if (category === "entryFoyer") {
+      const items = await entryfoyerUploadModel.find().sort({ createdAt: -1 });
+      return NextResponse.json({ items }, { status: 200 });
     } else if (category === "kitchen") {
       const items = await kitchenUploadsModel.find().sort({ createdAt: -1 });
       return NextResponse.json({ items }, { status: 200 });
