@@ -39,7 +39,7 @@ export default function Navbar2() {
     }
   };
   return (
-    <nav className=" bg-themeCol fixed top-28 text-white font-[500] w-[230px] px-8 pt-12 rounded-md h-[70dvh]">
+    <nav className=" bg-themeCol fixed top-28 text-white font-[500] rounded-e-xl w-[230px] px-8 pt-12  h-[70dvh] outline-offset-8">
       <div className="container flex w-fit flex-col gap-3">
         <h2
           className="cursor-pointer flex gap-2 items-center"

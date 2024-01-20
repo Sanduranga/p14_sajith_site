@@ -33,13 +33,7 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
   const dispatch = useDispatch();
   const itemRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const { status, data: session } = useSession();
-  const [uData, setUData] = useState({
-    _id: "",
-    userName: "",
-    userEmail: "",
-    userImage: "",
-    likedItemIds: [],
-  }); // To store user data
+
   const [bigImage, setImage] = useState<{ image: string; index: number }>();
 
   const allItemsRedux = useSelector(
@@ -125,16 +119,13 @@ const Welcome = ({ allItems }: { allItems: itemTypes[] }) => {
     }).catch((err) => alert(`User liked error: ${err}`));
   };
 
-  const userName = "saji" as string;
+  const userName = session?.user?.name;
 
   return (
-    <div className="flex mt-28 px-5">
-      <div className="w-[20vw]">
-        <Navbar2 />
-      </div>
-      <div className="w-[80vw]">
+    <div className="flex mt-28 mb-10 min-h-screen">
+      <div>
         {allItems.length ? (
-          userName === "sajith" ? (
+          userName === "tharaka edirisinghe" ? (
             <div className="">
               <Link
                 className="flex w-fit px-3 py-2 rounded-md mx-auto my-5 bg-themeCol text-white"

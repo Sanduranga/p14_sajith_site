@@ -1,37 +1,22 @@
+"use client";
 import React from "react";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
 import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { RootState } from "@reduxjs/toolkit/query";
+import { useSession } from "next-auth/react";
 
-const itemsData = async () => {
+const Kitchen = ({ items }: { items: itemTypes[] }) => {
+  const { data } = useSession();
+  const userName = data?.user?.name;
+
   try {
-    const res = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/wood_hub?category=kitchen`,
-      {
-        cache: "no-cache",
-      }
-    );
-    if (!res.ok) {
-      alert("Faild to fetch Cooking Hub items");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const Kitchen = async () => {
-  const userName = "sajith" as string;
-  try {
-    const { items } = await itemsData();
-    console.log(items);
-
     if (items.length > 0) {
-      if (userName === "sajith") {
+      if (userName === "tharaka edirisinghe") {
         return (
-          <div>
+          <div className="mt-28 mb-10">
             <Link
               className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
               href={"/addItem/entryFoyer"}
@@ -73,7 +58,7 @@ const Kitchen = async () => {
       } else {
         return (
           <div>
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap gap-5 mt-28 mb-10">
               {items.map((item: itemTypes) => (
                 <div
                   key={item._id}

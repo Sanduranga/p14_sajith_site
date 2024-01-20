@@ -5,6 +5,7 @@ import Navbar1 from "@/components/Navbar1";
 import Footer from "@/components/Footer";
 import Providers from "@/redux/Providers";
 import NextAuthProvider from "@/components/NextAuthProvider";
+import Navbar2 from "@/components/Navbar2";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,9 +24,16 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <Providers>
-            <Navbar1 />
-            {children}
-            <Footer />
+            <div className="flex">
+              <div className="w-[20vw] pl-5">
+                <Navbar2 />
+              </div>
+              <div className="w-[80vw] flex flex-col items-center">
+                <Navbar1 />
+                {children}
+                <Footer />
+              </div>
+            </div>
           </Providers>
         </NextAuthProvider>
       </body>
