@@ -3,13 +3,13 @@ import ClickedPage from "@/components/ClickedPage";
 const getItemById = async (id: string, category: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_URL}/api/wood_hub/${id}?category=${category}`,
+      `${process.env.NEXTAUTH_URL}/api/wood_hub/${id}?category=${category}`,
       {
         cache: "no-store",
       }
     );
     if (!res.ok) {
-      throw new Error("Edit item fetching faild");
+      throw new Error("+++++++++++++++++++++++Edit item fetching faild");
     }
 
     return res.json();

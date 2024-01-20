@@ -156,13 +156,13 @@ const AddItemForm = () => {
   };
 
   return (
-    <div>
+    <div className="mb-10">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-8 mx-auto mt-28 w-[50dvw] p-10 bg-gray-300 rounded-lg border-2"
       >
         <select
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           name="section"
           onChange={handleChange}
         >
@@ -178,55 +178,55 @@ const AddItemForm = () => {
         </select>
 
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="price"
           type="number"
           name="price"
           onChange={handleChange}
         />
         <textarea
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="description"
           name="description"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="length"
           type="text"
           name="length"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="width"
           type="text"
           name="width"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="height"
           type="text"
           name="height"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="material"
           type="text"
           name="material"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="color"
           type="text"
           name="color"
           onChange={handleChange}
         />
         <input
-          className="border-2 border-black px-2 rounded-md"
+          className="border-2 border-gray-500 px-2 rounded-md"
           placeholder="size"
           type="text"
           name="size"

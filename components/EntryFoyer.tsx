@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import DeleteButton from "./DeleteButton";
 import Link from "next/link";
@@ -7,43 +6,27 @@ import { itemTypes } from "./AddItemForm";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/Store";
+import { useSession } from "next-auth/react";
 
-// const itemsData = async () => {
-//   try {
-//     const res = await fetch(
-//       `${process.env.NEXTAUTH_URL}/api/wood_hub?category=entryFoyer`,
-//       {
-//         cache: "no-store",
-//       }
-//     );
-//     if (!res.ok) {
-//       alert("Faild to fetch Entry Foyer items");
-//     }
-
-//     return res.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-const EntryFoyer = () => {
+const EntryFoyer = ({ items }: { items: itemTypes[] }) => {
   // const [entryItems, setIEntryItems] = useState([]);
   // useEffect(() => {
   //   fetch(`/api/wood_hub?category=entryFoyer`)
   //     .then((res) => res.json())
   //     .then((data) => setIEntryItems(data.items));
   // }, []);
-  const allItems = useSelector(
-    (state: RootState) => state.welcomePage.allItems
-  );
-  const entryItems = allItems.filter((cat) => cat.section === "entryFoyer");
+  // const allItems = useSelector(
+  //   (state: RootState) => state.welcomePage.allItems
+  // );
+  // const entryItems = allItems.filter((cat) => cat.section === "entryFoyer");
 
-  const userName = "sajith" as string;
+  const { data } = useSession();
+  const userName = data?.user?.name;
 
   return (
-    <div>
-      {entryItems.length ? (
-        userName === "sajith" ? (
+    <div className="mt-28 mb-10">
+      {items.length ? (
+        userName === "tharaka edirisinghe" ? (
           <div>
             <Link
               className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
@@ -52,7 +35,7 @@ const EntryFoyer = () => {
               ADD ITEM
             </Link>
             <div className="flex flex-col-3 flex-wrap gap-5">
-              {entryItems.map((item: itemTypes) => (
+              {items.map((item: itemTypes) => (
                 <div
                   key={item._id}
                   className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
@@ -84,7 +67,7 @@ const EntryFoyer = () => {
           </div>
         ) : (
           <div className="flex flex-wrap gap-5">
-            {entryItems.map((item: itemTypes) => (
+            {items.map((item: itemTypes) => (
               <div
                 key={item._id}
                 className="flex flex-col w-[350px] h-auto p-2 gap-2 justify-center bg-green-200"
