@@ -47,6 +47,7 @@ export default async function ClickedItem({
     color,
     size,
     likes,
+    marks,
     description,
   } = item;
 
@@ -67,6 +68,7 @@ export default async function ClickedItem({
       color={color}
       size={size}
       likes={likes}
+      marks={marks}
       description={description}
     />
   );

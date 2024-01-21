@@ -23,11 +23,12 @@ export interface itemTypes {
   color: string;
   size: string;
   likes: number;
+  marks: number;
   description: string;
 }
 
 const AddItemForm = () => {
-  const [input, setInput] = useState({} as itemTypes);
+  const [input, setInput] = useState({} as any);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -86,7 +87,7 @@ const AddItemForm = () => {
   ) => {
     //  **************************************************************************
 
-    setInput((prevInput) => ({
+    setInput((prevInput: any) => ({
       ...prevInput,
       [e.target.name]: e.target.value,
     }));
@@ -94,10 +95,9 @@ const AddItemForm = () => {
 
   const handleUploadimage = (result: CldUploadWidgetResults, j: number) => {
     const info = result.info as object;
-    console.log(j);
 
     if ("secure_url" in info) {
-      setInput((prevInput) => ({
+      setInput((prevInput: any) => ({
         ...prevInput,
         [`image${j}`]: info.secure_url as string,
       }));

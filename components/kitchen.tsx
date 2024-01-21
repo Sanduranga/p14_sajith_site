@@ -84,7 +84,7 @@ const Kitchen = ({ items }: { items: itemTypes[] }) => {
       }
     } else {
       return (
-        <div>
+        <div className="min-h-screen mt-28">
           <Link
             className="flex w-fit p-1 rounded-md bg-green-500 mx-auto my-5 text-white"
             href={"/addItem/entryFoyer"}

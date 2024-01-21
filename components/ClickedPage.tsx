@@ -1,9 +1,22 @@
 "use client";
 import Image from "next/image";
 import { itemTypes } from "./AddItemForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ClickedPage(props: itemTypes) {
+  useEffect(() => {
+    const newMarks: number = props.marks + 1; //Adding marks for the item
+
+    fetch(`/api/wood_hub/${props._id}?category=${props.section}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        newMarks,
+      }),
+    }).catch((err) => alert(`Puting marks error :${err}`));
+  }, [props.section, props.marks, props._id]);
   const [bigImage, setBigImage] = useState(props.image1);
   return (
     <div className="wrapper flex flex-col px-5 mt-28 gap-10 mx-auto">
