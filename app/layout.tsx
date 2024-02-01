@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <NextAuthProvider>
           <Providers>
-            <div className="flex">
+            <div className="flex bg-yellow-950/40">
               <div className="w-[20vw] pl-5">
                 <Navbar2 />
               </div>

@@ -3,7 +3,7 @@ import EditForm from "@/components/EditForm";
 const getItemById = async (id: string, category: string) => {
   try {
     const res = await fetch(
-      `${process.env.NEXT_URL}/api/wood_hub/${id}?category=${category}`,
+      `${process.env.NEXTAUTH_URL}/api/wood_hub/${id}?category=${category}`,
       {
         cache: "no-store",
       }
@@ -41,6 +41,7 @@ export default async function EditItem({
     color,
     size,
     likes,
+    marks,
     description,
   } = item;
 
@@ -61,6 +62,7 @@ export default async function EditItem({
       color={color}
       size={size}
       likes={likes}
+      marks={marks}
       description={description}
     />
   );

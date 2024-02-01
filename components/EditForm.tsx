@@ -103,7 +103,7 @@ const EditForm = (props: itemTypes) => {
     }));
   };
   return (
-    <div>
+    <div className="mt-28 mb-10 min-h-screen">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-8 mx-auto w-[400px] p-5 border-2"

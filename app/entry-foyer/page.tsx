@@ -21,6 +21,7 @@ const itemsData = async () => {
 
 async function EntryFoyerItems() {
   const { items } = await itemsData();
+
   return <EntryFoyer items={items} />;
 }
 

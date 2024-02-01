@@ -5,7 +5,7 @@ import {
   CldUploadWidgetResults,
 } from "next-cloudinary";
 import Image from "next/image";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export interface itemTypes {
   _id: string;
@@ -26,9 +26,14 @@ export interface itemTypes {
   marks: number;
   description: string;
 }
+interface imageId {
+  imgId?: string;
+  key?: number;
+}
 
 const AddItemForm = () => {
   const [input, setInput] = useState({} as any);
+  const [imageId, setImgId] = useState({} as any);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -96,11 +101,32 @@ const AddItemForm = () => {
   const handleUploadimage = (result: CldUploadWidgetResults, j: number) => {
     const info = result.info as object;
 
-    if ("secure_url" in info) {
+    if ("secure_url" in info && "public_id" in info) {
+      setImgId((pre: any) => ({
+        ...pre,
+        [`imgPublicId${j}`]: info.public_id as string,
+      }));
       setInput((prevInput: any) => ({
         ...prevInput,
         [`image${j}`]: info.secure_url as string,
       }));
+    }
+  };
+
+  const handleRemoveImage = async (
+    e: FormEvent,
+    public_id: string,
+    j: number
+  ) => {
+    e.preventDefault();
+    const res = await fetch("/api/remove_image", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ public_id }),
+    });
+    if (res.ok) {
+      setInput((prev: any) => ({ ...prev, [`image${j}`]: "" }));
+      setImgId((prev: any) => ({ ...prev, [`imgPublicId${j}`]: "" }));
     }
   };
 
@@ -185,35 +211,51 @@ const AddItemForm = () => {
           const imageSources = input[`image${j + 1}`];
 
           return (
-            <CldUploadButton
-              key={j}
-              uploadPreset="wq0w4znw"
-              className="w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100"
-              onUpload={(result) => handleUploadimage(result, j + 1)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-6 h-6"
+            <>
+              <CldUploadButton
+                key={j}
+                uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET}
+                className={`w-full relative h-[150px] border-2 border-dotted grid place-items-center bg-slate-100 ${
+                  imageId[`imgPublicId${j + 1}`] && "pointer-events-none"
+                }`}
+                onUpload={(result) => handleUploadimage(result, j + 1)}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
-                />
-              </svg>
-              {imageSources && (
-                <Image
-                  src={imageSources}
-                  alt={`image_${j + 1}`}
-                  className="absolute object-cover inset-0"
-                  fill
-                />
+                {imageSources ? (
+                  <Image
+                    src={imageSources}
+                    alt={`image_${j + 1}`}
+                    className={`absolute object-cover inset-0 
+                  }`}
+                    fill
+                  />
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                    />
+                  </svg>
+                )}
+              </CldUploadButton>
+              {imageId[`imgPublicId${j + 1}`] && (
+                <button
+                  onClick={(e) =>
+                    handleRemoveImage(e, imageId[`imgPublicId${j + 1}`], j + 1)
+                  }
+                  className="bg-red-600 font-bold text-white px-4 py-2 w-fit"
+                >
+                  Remove Image
+                </button>
               )}
-            </CldUploadButton>
+            </>
           );
         })}
 
